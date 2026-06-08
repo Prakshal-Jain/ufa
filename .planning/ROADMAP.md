@@ -49,7 +49,7 @@ Plans:
 **Plans**: 5 plans (Wave 1: 02-01 data layer; Wave 2: 02-02, 02-03, 02-04 in parallel; Wave 3: 02-05 assembly)
 
 Plans:
-- [ ] 02-01-PLAN.md — Typed local data layer (data/*.ts placeholders) + ASSETS-NEEDED.md checklist
+- [x] 02-01-PLAN.md — Typed local data layer (data/*.ts placeholders) + ASSETS-NEEDED.md checklist
 - [ ] 02-02-PLAN.md — Concept + HowItWorks + Lineage sections (UFC→UFB→UFA, credits/money)
 - [ ] 02-03-PLAN.md — MatchShowcase (mobile-safe media) + PrizePool + Standings teaser
 - [ ] 02-04-PLAN.md — Sponsor-value + logo wall + Traction strip + working Formspree form + repeated CTA + Footer

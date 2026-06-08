@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-06-08T08:34:08.721Z"
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-06-08T08:51:23.203Z"
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 8
+  completed_plans: 4
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-08)
 
 **Core value:** A first-time visitor on a phone feels "I need to be part of this" within the first screen — and knows exactly how to get in touch / sponsor.
-**Current focus:** Phase 01 — foundation-pipeline-motion-system
+**Current focus:** Phase 02 — content-conversion-spine
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: 02 (content-conversion-spine) — EXECUTING
+Plan: 2 of 5
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: Not started
 | Phase 01 P01 | 3 | 3 tasks | 12 files |
 | Phase 01 P02 | 5min | 3 tasks | 3 files |
 | Phase 01 P03 | 2m | 3 tasks | 8 files |
+| Phase 02 P01 | 1min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01]: [Phase 01]: Static force-static next/og opengraph-image prerenders into out/ at build for correct share previews (dynamic OG routes do not statically generate).
 - [Phase 01]: Dependency-free node:test smoke gate (reduced-motion.smoke.mjs) proves the reduced-motion contract without adding a React test runner (keeps package.json untouched).
 - [Phase 01]: Motion primitives (Reveal/ScrollParallax/SmoothScroll) gate through the single useReducedMotionSafe hook; reduced motion is the base path, full motion the enhancement.
+- [Phase 02]: Content lives in a typed build-time data/*.ts layer (no fetch/CMS); swapping real values is a one-file edit, documented in repo-root ASSETS-NEEDED.md.
+- [Phase 02]: All v1 content ships as clearly-marked PLACEHOLDER with honest 'Season 1 - founding sponsors wanted' framing so no section renders empty; Formspree endpoint via NEXT_PUBLIC_FORMSPREE_ENDPOINT env with site.formspreeFallbackId fallback.
 
 ### Pending Todos
 
@@ -87,6 +90,6 @@ Note: PROJECT.md header counts "24 reqs" but the enumerated v1 list contains 26 
 
 ## Session Continuity
 
-Last session: 2026-06-08T08:30:22.811Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-06-08T08:51:16.868Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
