@@ -1,32 +1,68 @@
-// verify-build.mjs — post-build integrity check for the GitHub Pages static export.
-// Confirms the build emitted the load-bearing host files and that Tailwind is active.
-import { existsSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+// verify-build.mjs — post-build integrity guard for the GitHub Pages static export.
+// Fails the build (non-zero exit) if the load-bearing host files are missing, if
+// next.config.mjs introduces a non-empty basePath/assetPrefix (which would break
+// asset resolution at the apex root), or if Tailwind CSS did not ship. Zero external
+// deps: only node: builtins so it runs anywhere `node` does.
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = process.cwd();
+// 1. Resolve project root relative to THIS script (scripts/verify-build.mjs -> repo root),
+//    so the guard is robust regardless of the working directory it is invoked from.
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const root = join(scriptDir, "..");
 const out = join(root, "out");
 
 const errors = [];
 
-function require(path, label) {
-  if (!existsSync(join(out, path))) errors.push(`missing ${label}: out/${path}`);
+function fail(msg) {
+  errors.push(msg);
 }
 
-// 1. GitHub Pages host files must survive into out/ (CNAME for the apex domain,
-//    .nojekyll so Pages does not Jekyll-process the _next directory).
-require("CNAME", "GitHub Pages domain file");
-require(".nojekyll", "Jekyll-disable file");
+// 2. CNAME must exist AND name the apex domain, or GitHub Pages drops the custom domain.
+const cnamePath = join(out, "CNAME");
+if (!existsSync(cnamePath)) {
+  fail('out/CNAME missing — ensure public/CNAME exists and is copied by the build (expected "ufa.foundation")');
+} else {
+  const cname = readFileSync(cnamePath, "utf8").trim();
+  if (cname !== "ufa.foundation") {
+    fail(`out/CNAME content is "${cname}" but must be exactly "ufa.foundation" — fix public/CNAME`);
+  }
+}
 
-// 2. The home page must still render.
-require("index.html", "home page");
+// 3. .nojekyll must exist or Pages will Jekyll-process and 404 the _next/ directory.
+if (!existsSync(join(out, ".nojekyll"))) {
+  fail("out/.nojekyll missing — ensure public/.nojekyll exists and is copied by the build");
+}
 
-// 3. Tailwind v4 must be active — hashed CSS should exist under _next/static.
-function hasHashedCss(dir) {
+// 4. next.config.mjs must NOT set a non-empty basePath/assetPrefix. The apex domain serves
+//    from root; a non-empty value here would break every asset/link silently. Absent key or
+//    empty-string value both pass.
+const configPath = join(root, "next.config.mjs");
+if (!existsSync(configPath)) {
+  fail("next.config.mjs missing — cannot verify basePath/assetPrefix are empty");
+} else {
+  const config = readFileSync(configPath, "utf8");
+  for (const key of ["basePath", "assetPrefix"]) {
+    const m = config.match(new RegExp(`${key}\\s*:\\s*(["'])(.*?)\\1`));
+    if (m && m[2].length > 0) {
+      fail(`next.config.mjs sets a non-empty ${key} ("${m[2]}") — the apex domain serves from root; remove ${key} or set it to ""`);
+    }
+  }
+}
+
+// 5. The home page must still render.
+if (!existsSync(join(out, "index.html"))) {
+  fail("out/index.html missing — the home page did not export");
+}
+
+// 6. Tailwind/CSS must have shipped — at least one hashed .css under out/_next/static.
+function hasCss(dir) {
   if (!existsSync(dir)) return false;
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
-      if (hasHashedCss(full)) return true;
+      if (hasCss(full)) return true;
     } else if (entry.endsWith(".css")) {
       return true;
     }
@@ -34,8 +70,8 @@ function hasHashedCss(dir) {
   return false;
 }
 
-if (!hasHashedCss(join(out, "_next", "static"))) {
-  errors.push("no hashed CSS emitted under out/_next/static (Tailwind not active?)");
+if (!hasCss(join(out, "_next", "static"))) {
+  fail("no .css emitted under out/_next/static — Tailwind/CSS did not ship (check globals.css import)");
 }
 
 if (errors.length > 0) {
@@ -44,4 +80,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("verify-build OK: CNAME + .nojekyll + index.html present, Tailwind CSS emitted.");
+console.log("verify-build: OK");
