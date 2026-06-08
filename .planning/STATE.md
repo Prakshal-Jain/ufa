@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-06-08T08:26:34.183Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-06-08T08:29:55.041Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -47,6 +47,7 @@ Plan: 2 of 3
 
 *Updated after each plan completion*
 | Phase 01 P01 | 3 | 3 tasks | 12 files |
+| Phase 01 P02 | 5min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -62,6 +63,8 @@ Recent decisions affecting current work:
 - [Roadmap]: Build on the existing Next.js → GH Pages pipeline; Phase 1 hardens/extends it, does not re-solve hosting.
 - [Phase 01]: Self-hosted Orbitron (display) + Inter (body) SIL-OFL variable WOFF2 fonts via next/font/local — zero external font requests, no licensing risk.
 - [Phase 01]: Dual-representation design tokens: styles/tokens.css (CSS vars, source of truth) mirrored by styles/tokens.ts (typed values for motion/JS).
+- [Phase 01]: [Phase 01]: CI build-output guard (CNAME content + .nojekyll + empty basePath/assetPrefix + Tailwind CSS) runs between build and upload; a push that would break the apex link fails the pipeline.
+- [Phase 01]: [Phase 01]: Static force-static next/og opengraph-image prerenders into out/ at build for correct share previews (dynamic OG routes do not statically generate).
 
 ### Pending Todos
 
@@ -81,6 +84,6 @@ Note: PROJECT.md header counts "24 reqs" but the enumerated v1 list contains 26 
 
 ## Session Continuity
 
-Last session: 2026-06-08T08:26:28.284Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-06-08T08:29:55.039Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None

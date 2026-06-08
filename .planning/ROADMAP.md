@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Tooling, tokens & fonts foundation (Tailwind v4 @theme, cinematic sci-fi tokens, self-hosted variable fonts, MotionConfig reduced-motion base, deps install)
-- [ ] 01-02-PLAN.md — CI/build guards & deploy hardening + static OG image (CNAME/.nojekyll + empty-basePath guard, hardened deploy.yml, opengraph-image)
+- [x] 01-02-PLAN.md — CI/build guards & deploy hardening + static OG image (CNAME/.nojekyll + empty-basePath guard, hardened deploy.yml, opengraph-image)
 - [ ] 01-03-PLAN.md — Reduced-motion-first motion primitives (Reveal, ScrollParallax, Lenis SmoothScroll) + UI primitives (SectionShell, CTAButton, GradientText)
 
 ### Phase 2: Content & Conversion Spine

@@ -10,8 +10,8 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 ### Foundation & Delivery
 
 - [x] **SITE-01**: Visitor reaches the new landing page at `ufa.foundation` over HTTPS, replacing the Coming Soon placeholder
-- [ ] **SITE-02**: All styles, scripts, fonts, and media load correctly from the apex root on the *deployed* site (no broken paths); `CNAME` + `.nojekyll` preserved in the build output
-- [ ] **SITE-03**: Pushing to `main` auto-builds and deploys the updated site via the existing GitHub Actions pipeline
+- [x] **SITE-02**: All styles, scripts, fonts, and media load correctly from the apex root on the *deployed* site (no broken paths); `CNAME` + `.nojekyll` preserved in the build output
+- [x] **SITE-03**: Pushing to `main` auto-builds and deploys the updated site via the existing GitHub Actions pipeline
 - [x] **SITE-04**: Shared links preview well — page has title, description, and a static Open Graph image
 
 ### Hero
@@ -88,8 +88,8 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | SITE-01 | Phase 1 | Complete |
-| SITE-02 | Phase 1 | Pending |
-| SITE-03 | Phase 1 | Pending |
+| SITE-02 | Phase 1 | Complete |
+| SITE-03 | Phase 1 | Complete |
 | SITE-04 | Phase 1 | Complete |
 | MOTION-02 | Phase 1 | Complete |
 | CONCEPT-01 | Phase 2 | Pending |
