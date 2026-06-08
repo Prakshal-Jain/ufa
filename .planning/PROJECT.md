@@ -18,6 +18,10 @@ A first-time visitor on a phone is hit with a "holy shit, I need to be part of t
 - ✓ Custom apex domain `ufa.foundation` with HTTPS + `www` → apex redirect — existing
 - ✓ Push-to-`main` auto-builds and deploys via GitHub Actions — existing
 - ✓ `CNAME` + `.nojekyll` baked into the build output — existing
+- ✓ Cinematic sci-fi design-token system (Tailwind v4 `@theme` + `--ufa-*` CSS vars + typed TS mirror) — Phase 1
+- ✓ Self-hosted variable fonts (Orbitron/Inter), zero external font requests — Phase 1
+- ✓ Reduced-motion-first motion layer (MotionConfig + `useReducedMotionSafe`; Reveal/ScrollParallax/SmoothScroll primitives) — Phase 1
+- ✓ Build/CI guard enforcing CNAME/.nojekyll survival + empty basePath; static OG image — Phase 1
 
 ### Active
 
@@ -87,4 +91,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-08 after initialization*
+*Last updated: 2026-06-08 after Phase 1 (Foundation, Pipeline & Motion System) — complete*
