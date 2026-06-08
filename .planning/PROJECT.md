@@ -27,13 +27,13 @@ A first-time visitor on a phone is hit with a "holy shit, I need to be part of t
 
 <!-- The new site. Hypotheses until shipped. -->
 
-- [ ] Replace the placeholder with one epic, scrolling cinematic landing page
-- [ ] Hero showpiece: a striking agent-vs-agent "versus" moment (the maximal motion beat)
-- [ ] Communicate the concept: AI agents interrogate + fight for credits/money
-- [ ] Showcase the spectacle using real matches / footage (provided by user)
-- [ ] Show concrete prize pool / credits details
-- [ ] Primary CTA: get in touch / sponsor (lead capture or contact)
-- [ ] Lean into the UFC → UFB → UFA naming lineage as a brand asset
+- [x] Replace the placeholder with one epic, scrolling landing page — Phase 2 (cinematic hero showpiece pending Phases 3-4)
+- [ ] Hero showpiece: a striking agent-vs-agent "versus" moment (the maximal motion beat) — Phases 3-4
+- [x] Communicate the concept: AI agents interrogate + fight for credits/money — Phase 2
+- [x] Showcase the spectacle (match showcase section; real footage swappable via data layer) — Phase 2
+- [x] Show concrete prize pool / credits details — Phase 2
+- [x] Primary CTA: get in touch / sponsor (Formspree form) — Phase 2
+- [x] Lean into the UFC → UFB → UFA naming lineage as a brand asset — Phase 2
 - [ ] Use provided brand assets (logo/colors/fonts) or design the identity if absent
 - [ ] Mobile-friendly; motion stays smooth (~60fps) on phones with reduced-motion fallback
 - [ ] Broadly impressive to all four audiences (investors, sponsors, companies, SF hackers)
@@ -91,4 +91,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-08 after Phase 1 (Foundation, Pipeline & Motion System) — complete*
+*Last updated: 2026-06-08 after Phase 2 (Content & Conversion Spine) — complete; full sendable landing page live in build, cinematic hero pending Phases 3-4*
