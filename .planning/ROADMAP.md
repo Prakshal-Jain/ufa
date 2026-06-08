@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Tooling, tokens & fonts foundation (Tailwind v4 @theme, cinematic sci-fi tokens, self-hosted variable fonts, MotionConfig reduced-motion base, deps install)
 - [x] 01-02-PLAN.md — CI/build guards & deploy hardening + static OG image (CNAME/.nojekyll + empty-basePath guard, hardened deploy.yml, opengraph-image)
-- [ ] 01-03-PLAN.md — Reduced-motion-first motion primitives (Reveal, ScrollParallax, Lenis SmoothScroll) + UI primitives (SectionShell, CTAButton, GradientText)
+- [x] 01-03-PLAN.md — Reduced-motion-first motion primitives (Reveal, ScrollParallax, Lenis SmoothScroll) + UI primitives (SectionShell, CTAButton, GradientText)
 
 ### Phase 2: Content & Conversion Spine
 **Goal**: A first-time visitor can read and understand the entire UFA story — what it is, how a fight works, proof it is alive, what is at stake, why to sponsor — and can submit interest through a working hosted form, all in a conversion-optimized scroll order with social proof adjacent to the CTA. This is a complete, end-to-end-shippable page validated on the deployed URL, before any risky hero work.
