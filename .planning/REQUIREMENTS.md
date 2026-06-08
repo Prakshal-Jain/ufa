@@ -23,9 +23,9 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 
 ### Concept & How It Works
 
-- [ ] **CONCEPT-01**: Visitor can read a clear explanation of what UFA is (agents interrogate + fight for credits/money)
-- [ ] **CONCEPT-02**: Visitor can understand how a fight works via a "how it works" section (format / flow)
-- [ ] **CONCEPT-03**: Positioning leans into the UFC → UFB → UFA lineage
+- [x] **CONCEPT-01**: Visitor can read a clear explanation of what UFA is (agents interrogate + fight for credits/money)
+- [x] **CONCEPT-02**: Visitor can understand how a fight works via a "how it works" section (format / flow)
+- [x] **CONCEPT-03**: Positioning leans into the UFC → UFB → UFA lineage
 
 ### Spectacle Showcase
 
@@ -92,9 +92,9 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 | SITE-03 | Phase 1 | Complete |
 | SITE-04 | Phase 1 | Complete |
 | MOTION-02 | Phase 1 | Complete |
-| CONCEPT-01 | Phase 2 | Pending |
-| CONCEPT-02 | Phase 2 | Pending |
-| CONCEPT-03 | Phase 2 | Pending |
+| CONCEPT-01 | Phase 2 | Complete |
+| CONCEPT-02 | Phase 2 | Complete |
+| CONCEPT-03 | Phase 2 | Complete |
 | SHOW-01 | Phase 2 | Pending |
 | SHOW-02 | Phase 2 | Pending |
 | PRIZE-01 | Phase 2 | Pending |
