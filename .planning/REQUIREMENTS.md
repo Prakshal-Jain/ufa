@@ -83,17 +83,42 @@ Explicitly excluded for v1, with reasoning.
 
 ## Traceability
 
-Populated during roadmap creation.
+Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. Phase 4 (WebGL hero) owns no exclusive requirement — it enhances HERO-01 (delivered in Phase 3) and is bounded by the HERO-04 fallback contract, so it remains droppable without leaving any requirement unmet.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (filled by roadmapper) | | |
+| SITE-01 | Phase 1 | Pending |
+| SITE-02 | Phase 1 | Pending |
+| SITE-03 | Phase 1 | Pending |
+| SITE-04 | Phase 1 | Pending |
+| MOTION-02 | Phase 1 | Pending |
+| CONCEPT-01 | Phase 2 | Pending |
+| CONCEPT-02 | Phase 2 | Pending |
+| CONCEPT-03 | Phase 2 | Pending |
+| SHOW-01 | Phase 2 | Pending |
+| SHOW-02 | Phase 2 | Pending |
+| PRIZE-01 | Phase 2 | Pending |
+| PRIZE-02 | Phase 2 | Pending |
+| SPON-01 | Phase 2 | Pending |
+| SPON-02 | Phase 2 | Pending |
+| SPON-03 | Phase 2 | Pending |
+| SPON-04 | Phase 2 | Pending |
+| SPON-05 | Phase 2 | Pending |
+| MOTION-01 | Phase 2 | Pending |
+| MOTION-03 | Phase 2 | Pending |
+| HERO-01 | Phase 3 | Pending |
+| HERO-02 | Phase 3 | Pending |
+| HERO-03 | Phase 3 | Pending |
+| HERO-04 | Phase 3 | Pending |
+| QA-01 | Phase 5 | Pending |
+| QA-02 | Phase 5 | Pending |
+| QA-03 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 24 total
-- Mapped to phases: (pending roadmap)
-- Unmapped: (pending roadmap)
+- v1 requirements: 26 total (enumerated; the prose header's "24" predates final enumeration)
+- Mapped to phases: 26
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-08*
-*Last updated: 2026-06-08 after initial definition*
+*Last updated: 2026-06-08 after roadmap creation (traceability populated)*
