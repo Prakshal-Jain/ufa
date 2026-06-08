@@ -46,10 +46,14 @@ Plans:
   3. Visitor sees concrete prize pool / credits and a standings/leaderboard teaser of competing agents
   4. Visitor sees sponsor-value framing, a placeholder-capable partner logo wall, and a traction/metrics strip, and can submit interest through a working hosted form (Formspree/Tally) — with the CTA repeated near the end of the page alongside social proof
   5. Scroll-driven cinematic motion (reveals, parallax, depth) animates the sections using only `transform`/`opacity`/`filter`, holding ~60fps on a mid-tier phone with no layout-shift-induced CLS
-**Plans**: TBD
+**Plans**: 5 plans (Wave 1: 02-01 data layer; Wave 2: 02-02, 02-03, 02-04 in parallel; Wave 3: 02-05 assembly)
 
 Plans:
-- [ ] 02-01: TBD during planning
+- [ ] 02-01-PLAN.md — Typed local data layer (data/*.ts placeholders) + ASSETS-NEEDED.md checklist
+- [ ] 02-02-PLAN.md — Concept + HowItWorks + Lineage sections (UFC→UFB→UFA, credits/money)
+- [ ] 02-03-PLAN.md — MatchShowcase (mobile-safe media) + PrizePool + Standings teaser
+- [ ] 02-04-PLAN.md — Sponsor-value + logo wall + Traction strip + working Formspree form + repeated CTA + Footer
+- [ ] 02-05-PLAN.md — Static hero header + page assembly (SmoothScroll) + real metadata
 
 ### Phase 3: Hero — Static Poster Baseline (Sendable Gate)
 **Goal**: The first screen hits the visitor with a cinematic showpiece that conveys "Ultimate Agent Fight" and high energy, states the one-line value as readable text, and surfaces the primary sponsor CTA — all rendered from a static poster image with zero risky JS, so it is the guaranteed first paint and the reduced-motion target. After this phase the page is genuinely impressive and **fully sendable**; the WebGL beat that follows is optional.
