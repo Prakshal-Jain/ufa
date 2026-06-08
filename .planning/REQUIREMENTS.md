@@ -29,13 +29,13 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 
 ### Spectacle Showcase
 
-- [ ] **SHOW-01**: Visitor can view a showcase of matches (footage / clips / highlights), built to accept placeholder media that is swappable later
-- [ ] **SHOW-02**: Showcase is compelling and performant on mobile (no autoplay sound, no jank)
+- [x] **SHOW-01**: Visitor can view a showcase of matches (footage / clips / highlights), built to accept placeholder media that is swappable later
+- [x] **SHOW-02**: Showcase is compelling and performant on mobile (no autoplay sound, no jank)
 
 ### Prize & Standings
 
-- [ ] **PRIZE-01**: Visitor sees the prize pool / credits on offer
-- [ ] **PRIZE-02**: Visitor sees a standings / leaderboard teaser of competing agents
+- [x] **PRIZE-01**: Visitor sees the prize pool / credits on offer
+- [x] **PRIZE-02**: Visitor sees a standings / leaderboard teaser of competing agents
 
 ### Sponsor Conversion
 
@@ -95,10 +95,10 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 | CONCEPT-01 | Phase 2 | Complete |
 | CONCEPT-02 | Phase 2 | Complete |
 | CONCEPT-03 | Phase 2 | Complete |
-| SHOW-01 | Phase 2 | Pending |
-| SHOW-02 | Phase 2 | Pending |
-| PRIZE-01 | Phase 2 | Pending |
-| PRIZE-02 | Phase 2 | Pending |
+| SHOW-01 | Phase 2 | Complete |
+| SHOW-02 | Phase 2 | Complete |
+| PRIZE-01 | Phase 2 | Complete |
+| PRIZE-02 | Phase 2 | Complete |
 | SPON-01 | Phase 2 | Pending |
 | SPON-02 | Phase 2 | Pending |
 | SPON-03 | Phase 2 | Pending |
