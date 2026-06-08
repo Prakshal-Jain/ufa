@@ -29,10 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Pushing to `main` auto-builds and deploys via the existing GitHub Actions pipeline, with `CNAME` + `.nojekyll` preserved in the build output (CI fails the build if either is missing)
   3. Sharing the link renders a correct title, description, and static Open Graph image preview
   4. With `prefers-reduced-motion` set, the motion system serves a fully static base path by default — reduced motion is the default, full motion is the enhancement (verifiable via the motion primitives in isolation)
-**Plans**: TBD
+**Plans**: 3 plans (Wave 1: 01-01; Wave 2: 01-02, 01-03 in parallel)
 
 Plans:
-- [ ] 01-01: TBD during planning
+- [ ] 01-01-PLAN.md — Tooling, tokens & fonts foundation (Tailwind v4 @theme, cinematic sci-fi tokens, self-hosted variable fonts, MotionConfig reduced-motion base, deps install)
+- [ ] 01-02-PLAN.md — CI/build guards & deploy hardening + static OG image (CNAME/.nojekyll + empty-basePath guard, hardened deploy.yml, opengraph-image)
+- [ ] 01-03-PLAN.md — Reduced-motion-first motion primitives (Reveal, ScrollParallax, Lenis SmoothScroll) + UI primitives (SectionShell, CTAButton, GradientText)
 
 ### Phase 2: Content & Conversion Spine
 **Goal**: A first-time visitor can read and understand the entire UFA story — what it is, how a fight works, proof it is alive, what is at stake, why to sponsor — and can submit interest through a working hosted form, all in a conversion-optimized scroll order with social proof adjacent to the CTA. This is a complete, end-to-end-shippable page validated on the deployed URL, before any risky hero work.
@@ -98,7 +100,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation, Pipeline & Motion System | 0/TBD | Not started | - |
+| 1. Foundation, Pipeline & Motion System | 0/3 | Planned | - |
 | 2. Content & Conversion Spine | 0/TBD | Not started | - |
 | 3. Hero — Static Poster Baseline (Sendable Gate) | 0/TBD | Not started | - |
 | 4. Hero Showpiece — WebGL Enhancement | 0/TBD | Not started | - |
