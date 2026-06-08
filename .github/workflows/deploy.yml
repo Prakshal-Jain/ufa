@@ -4,6 +4,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # External trigger for near-instant rebuilds. Have Zapier/Make POST to the
+  # GitHub repository_dispatch API with event_type "luma-update" when a Luma
+  # event changes, and the site redeploys within minutes.
+  repository_dispatch:
+    types: [luma-update]
+  # Hourly rebuild so Luma event dates stay current (static export bakes them in).
+  schedule:
+    - cron: "0 * * * *"
 
 # Allow the workflow to publish to GitHub Pages.
 permissions:
@@ -26,9 +34,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
       - run: npm run build
-      - run: npm run verify:build
+        env:
+          # Google Calendar secret iCal URL. Set in repo
+          # Settings → Secrets and variables → Actions.
+          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

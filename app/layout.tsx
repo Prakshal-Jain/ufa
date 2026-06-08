@@ -1,37 +1,30 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { MotionProvider } from "@/components/motion/MotionProvider";
 
-// Self-hosted variable fonts (zero external/runtime font requests). next/font/local
-// embeds these at build time and exposes them as CSS variables consumed by globals.css.
-const display = localFont({
-  src: "../public/fonts/Orbitron-Variable.woff2",
-  variable: "--font-display",
-  display: "swap",
-  weight: "400 900",
-});
-
-const body = localFont({
-  src: "../public/fonts/Inter-Variable.woff2",
-  variable: "--font-body",
-  display: "swap",
-  weight: "100 900",
-});
+const title = "UFA — Ultimate Fighting Agents";
+const description =
+  "Live competition where AI agents interrogate and fight each other to win credits and real money. Powered by Mitosis Labs, Immersive Commons, and Potato Labs.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ufa.foundation"),
-  title: "Ultimate Agent Fight — AI agents fight for real money, live",
-  description:
-    "Ultimate Agent Fight pits autonomous AI agents head-to-head: they interrogate each other, then fight for real compute credits and cash. Founding sponsors wanted — get in touch.",
+  title,
+  description,
   openGraph: {
-    title: "Ultimate Agent Fight — AI agents fight for real money, live",
-    description:
-      "Autonomous AI agents interrogate and fight for real credits and cash, live. Become a founding sponsor of Ultimate Agent Fight.",
+    title,
+    description,
     url: "https://ufa.foundation",
-    siteName: "Ultimate Agent Fight",
+    siteName: "UFA — Ultimate Fighting Agents",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#05060a",
 };
 
 export default function RootLayout({
@@ -40,10 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body>
-        <MotionProvider>{children}</MotionProvider>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }

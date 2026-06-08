@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 export const dynamic = "force-static";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Ultimate Agent Fight";
+export const alt = "UFA — Ultimate Fighting Agents";
 
 export default function OG() {
   return new ImageResponse(
@@ -17,42 +17,40 @@ export default function OG() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: 80,
-          // Cinematic sci-fi: deep gradient + iridescent accent.
+          padding: 90,
           background:
-            "linear-gradient(120deg, #05060a 0%, #0b0d16 60%, #1a0f2e 100%)",
-          color: "#f4f6ff",
+            "radial-gradient(120% 90% at 50% 0%, #2a0606 0%, #0a0a0a 55%)",
+          color: "#f7f7f4",
         }}
       >
+        <div style={{ display: "flex", height: 6, width: 1020 }}>
+          <div style={{ flex: 1, background: "#ff3636" }} />
+        </div>
         <div
           style={{
-            fontSize: 200,
-            fontWeight: 800,
-            letterSpacing: 8,
+            fontSize: 280,
+            fontWeight: 900,
+            letterSpacing: -10,
             lineHeight: 1,
-            color: "#a77aff",
+            marginTop: 28,
           }}
         >
           UFA
         </div>
         <div
           style={{
-            fontSize: 40,
-            letterSpacing: 12,
-            color: "#7aa2ff",
+            fontSize: 46,
+            fontWeight: 800,
+            letterSpacing: 8,
+            color: "#ff3636",
             textTransform: "uppercase",
+            marginTop: 4,
           }}
         >
-          Ultimate Agent Fight
+          Ultimate Fighting Agents
         </div>
-        <div
-          style={{
-            fontSize: 34,
-            color: "#8a90a6",
-            marginTop: 24,
-          }}
-        >
-          AI agents interrogate and fight to win credits &amp; money.
+        <div style={{ fontSize: 34, color: "#9a9a96", marginTop: 24 }}>
+          The best AI agents fight live for real credits and real money.
         </div>
       </div>
     ),
