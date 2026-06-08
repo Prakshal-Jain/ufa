@@ -1,0 +1,35 @@
+/* styles/tokens.css — SINGLE SOURCE OF TRUTH for the cinematic sci-fi design system.
+ * CSS custom properties consumed by all styling; mirrored (numeric values) in tokens.ts. */
+:root {
+  /* base palette — deep cinematic dark */
+  --ufa-bg: #05060a;
+  --ufa-bg-elevated: #0b0d16;
+  --ufa-fg: #f4f6ff;
+  --ufa-muted: #8a90a6;
+  --ufa-rule: #1c2030;
+
+  /* iridescent / holographic accents */
+  --ufa-accent: #7aa2ff;
+  --ufa-accent-2: #a77aff;
+  --ufa-accent-3: #ff7ad9;
+  --ufa-accent-iridescent: linear-gradient(
+    120deg,
+    #7aa2ff 0%,
+    #a77aff 45%,
+    #ff7ad9 100%
+  );
+  --ufa-glow: 0 0 40px rgba(122, 162, 255, 0.35);
+
+  /* fluid cinematic type scale */
+  --ufa-type-display: clamp(3rem, 11vw, 9rem);
+  --ufa-type-h2: clamp(2rem, 6vw, 4rem);
+  --ufa-type-body: clamp(1rem, 2.5vw, 1.25rem);
+
+  /* rhythm */
+  --ufa-space-section: clamp(4rem, 12vw, 10rem);
+  --ufa-radius: 0.75rem;
+
+  /* motion durations / easing (mirrored in tokens.ts) */
+  --ufa-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ufa-dur-reveal: 0.6s;
+}

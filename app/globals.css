@@ -1,8 +1,21 @@
-:root {
-  --bg: #0a0a0b;
-  --fg: #f5f5f4;
-  --muted: #71717a;
-  --rule: #27272a;
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Map cinematic sci-fi tokens into Tailwind v4's design system (CSS-first @theme).
+ * Font CSS vars (--font-display / --font-body) are provided by next/font/local in layout.tsx. */
+@theme {
+  --color-ufa-bg: var(--ufa-bg);
+  --color-ufa-bg-elevated: var(--ufa-bg-elevated);
+  --color-ufa-fg: var(--ufa-fg);
+  --color-ufa-muted: var(--ufa-muted);
+  --color-ufa-rule: var(--ufa-rule);
+  --color-ufa-accent: var(--ufa-accent);
+  --color-ufa-accent-2: var(--ufa-accent-2);
+  --color-ufa-accent-3: var(--ufa-accent-3);
+  --radius-ufa: var(--ufa-radius);
+  --ease-ufa-out: var(--ufa-ease-out);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
 * {
@@ -17,11 +30,11 @@ body {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--ufa-bg);
+  color: var(--ufa-fg);
   font-family:
-    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
+    var(--font-body), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -40,12 +53,13 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise 0.9s var(--ufa-ease-out) both;
 }
 
 .wordmark {
-  font-size: clamp(4rem, 18vw, 9rem);
-  font-weight: 600;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--ufa-type-display);
+  font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1;
 }
@@ -56,14 +70,14 @@ body {
   font-weight: 300;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ufa-muted);
   padding-left: 0.35em; /* optically balance the letter-spacing */
 }
 
 .rule {
   width: 2.5rem;
   height: 1px;
-  background: var(--rule);
+  background: var(--ufa-rule);
   margin: 2.25rem 0 1.5rem;
 }
 
@@ -72,7 +86,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ufa-muted);
 }
 
 @keyframes rise {
