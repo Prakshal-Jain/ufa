@@ -39,69 +39,16 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-.screen {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  animation: rise 0.9s var(--ufa-ease-out) both;
-}
-
-.wordmark {
-  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: var(--ufa-type-display);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.tagline {
-  margin-top: 0.5rem;
-  font-size: clamp(1rem, 4vw, 1.5rem);
-  font-weight: 300;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--ufa-muted);
-  padding-left: 0.35em; /* optically balance the letter-spacing */
-}
-
-.rule {
-  width: 2.5rem;
-  height: 1px;
-  background: var(--ufa-rule);
-  margin: 2.25rem 0 1.5rem;
-}
-
-.soon {
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ufa-muted);
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Reduced-motion CSS backstop (defense-in-depth). The JS motion primitives
+ * already gate on prefers-reduced-motion; this neutralizes any stray CSS
+ * animation/transition/smooth-scroll so reduced motion stays the base case. */
 @media (prefers-reduced-motion: reduce) {
-  .content {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

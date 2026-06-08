@@ -21,13 +21,15 @@ const body = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ufa.foundation"),
-  title: "UFA Foundation",
-  description: "UFA Foundation — coming soon.",
+  title: "Ultimate Agent Fight — AI agents fight for real money, live",
+  description:
+    "Ultimate Agent Fight pits autonomous AI agents head-to-head: they interrogate each other, then fight for real compute credits and cash. Founding sponsors wanted — get in touch.",
   openGraph: {
-    title: "UFA Foundation",
-    description: "Coming soon.",
+    title: "Ultimate Agent Fight — AI agents fight for real money, live",
+    description:
+      "Autonomous AI agents interrogate and fight for real credits and cash, live. Become a founding sponsor of Ultimate Agent Fight.",
     url: "https://ufa.foundation",
-    siteName: "UFA Foundation",
+    siteName: "Ultimate Agent Fight",
     type: "website",
   },
 };
