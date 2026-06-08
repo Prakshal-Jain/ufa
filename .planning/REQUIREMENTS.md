@@ -39,11 +39,11 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 
 ### Sponsor Conversion
 
-- [ ] **SPON-01**: Visitor sees sponsor-value framing (why sponsor UFA, audience reach)
-- [ ] **SPON-02**: Visitor sees a partner / sponsor logo wall (placeholder-capable)
-- [ ] **SPON-03**: Visitor sees a traction / metrics strip
-- [ ] **SPON-04**: Visitor can submit interest through a working hosted form (Formspree or Tally) for "get in touch / sponsor"
-- [ ] **SPON-05**: The CTA is repeated near the end of the page with social proof placed adjacent to it
+- [x] **SPON-01**: Visitor sees sponsor-value framing (why sponsor UFA, audience reach)
+- [x] **SPON-02**: Visitor sees a partner / sponsor logo wall (placeholder-capable)
+- [x] **SPON-03**: Visitor sees a traction / metrics strip
+- [x] **SPON-04**: Visitor can submit interest through a working hosted form (Formspree or Tally) for "get in touch / sponsor"
+- [x] **SPON-05**: The CTA is repeated near the end of the page with social proof placed adjacent to it
 
 ### Motion & Experience
 
@@ -99,11 +99,11 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 | SHOW-02 | Phase 2 | Complete |
 | PRIZE-01 | Phase 2 | Complete |
 | PRIZE-02 | Phase 2 | Complete |
-| SPON-01 | Phase 2 | Pending |
-| SPON-02 | Phase 2 | Pending |
-| SPON-03 | Phase 2 | Pending |
-| SPON-04 | Phase 2 | Pending |
-| SPON-05 | Phase 2 | Pending |
+| SPON-01 | Phase 2 | Complete |
+| SPON-02 | Phase 2 | Complete |
+| SPON-03 | Phase 2 | Complete |
+| SPON-04 | Phase 2 | Complete |
+| SPON-05 | Phase 2 | Complete |
 | MOTION-01 | Phase 2 | Pending |
 | MOTION-03 | Phase 2 | Pending |
 | HERO-01 | Phase 3 | Pending |

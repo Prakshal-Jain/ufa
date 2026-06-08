@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-06-08T08:54:20.698Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-06-08T08:55:22.645Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 8
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State
@@ -52,6 +52,7 @@ Plan: 2 of 5
 | Phase 02 P01 | 1min | 3 tasks | 9 files |
 | Phase 02 P02 | 2min | 3 tasks | 3 files |
 | Phase 02 P03 | 1.5min | 3 tasks | 3 files |
+| Phase 02 P04 | 2min | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,7 @@ Recent decisions affecting current work:
 - [Phase 01]: Motion primitives (Reveal/ScrollParallax/SmoothScroll) gate through the single useReducedMotionSafe hook; reduced motion is the base path, full motion the enhancement.
 - [Phase 02]: Content lives in a typed build-time data/*.ts layer (no fetch/CMS); swapping real values is a one-file edit, documented in repo-root ASSETS-NEEDED.md.
 - [Phase 02]: All v1 content ships as clearly-marked PLACEHOLDER with honest 'Season 1 - founding sponsors wanted' framing so no section renders empty; Formspree endpoint via NEXT_PUBLIC_FORMSPREE_ENDPOINT env with site.formspreeFallbackId fallback.
+- [Phase 02]: Submit control is a native <button type=submit> styled to match CTAButton so the no-JS native Formspree submit path works.
 
 ### Pending Todos
 
@@ -92,6 +94,6 @@ Note: PROJECT.md header counts "24 reqs" but the enumerated v1 list contains 26 
 
 ## Session Continuity
 
-Last session: 2026-06-08T08:54:20.694Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-06-08T08:55:17.231Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None

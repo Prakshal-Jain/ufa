@@ -52,7 +52,7 @@ Plans:
 - [x] 02-01-PLAN.md — Typed local data layer (data/*.ts placeholders) + ASSETS-NEEDED.md checklist
 - [x] 02-02-PLAN.md — Concept + HowItWorks + Lineage sections (UFC→UFB→UFA, credits/money)
 - [x] 02-03-PLAN.md — MatchShowcase (mobile-safe media) + PrizePool + Standings teaser
-- [ ] 02-04-PLAN.md — Sponsor-value + logo wall + Traction strip + working Formspree form + repeated CTA + Footer
+- [x] 02-04-PLAN.md — Sponsor-value + logo wall + Traction strip + working Formspree form + repeated CTA + Footer
 - [ ] 02-05-PLAN.md — Static hero header + page assembly (SmoothScroll) + real metadata
 
 ### Phase 3: Hero — Static Poster Baseline (Sendable Gate)
