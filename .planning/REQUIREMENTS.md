@@ -9,10 +9,10 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 
 ### Foundation & Delivery
 
-- [ ] **SITE-01**: Visitor reaches the new landing page at `ufa.foundation` over HTTPS, replacing the Coming Soon placeholder
+- [x] **SITE-01**: Visitor reaches the new landing page at `ufa.foundation` over HTTPS, replacing the Coming Soon placeholder
 - [ ] **SITE-02**: All styles, scripts, fonts, and media load correctly from the apex root on the *deployed* site (no broken paths); `CNAME` + `.nojekyll` preserved in the build output
 - [ ] **SITE-03**: Pushing to `main` auto-builds and deploys the updated site via the existing GitHub Actions pipeline
-- [ ] **SITE-04**: Shared links preview well — page has title, description, and a static Open Graph image
+- [x] **SITE-04**: Shared links preview well — page has title, description, and a static Open Graph image
 
 ### Hero
 
@@ -48,7 +48,7 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 ### Motion & Experience
 
 - [ ] **MOTION-01**: Scroll-driven cinematic motion (reveals, parallax, depth) animates the sections
-- [ ] **MOTION-02**: All motion is disabled/reduced when `prefers-reduced-motion` is set; the page is fully readable and usable without motion (reduced path is the base case)
+- [x] **MOTION-02**: All motion is disabled/reduced when `prefers-reduced-motion` is set; the page is fully readable and usable without motion (reduced path is the base case)
 - [ ] **MOTION-03**: Page holds ~60fps on a mid-tier phone — animations are limited to `transform`/`opacity`/`filter` and avoid layout-shifting properties
 
 ### Quality
@@ -87,11 +87,11 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SITE-01 | Phase 1 | Pending |
+| SITE-01 | Phase 1 | Complete |
 | SITE-02 | Phase 1 | Pending |
 | SITE-03 | Phase 1 | Pending |
-| SITE-04 | Phase 1 | Pending |
-| MOTION-02 | Phase 1 | Pending |
+| SITE-04 | Phase 1 | Complete |
+| MOTION-02 | Phase 1 | Complete |
 | CONCEPT-01 | Phase 2 | Pending |
 | CONCEPT-02 | Phase 2 | Pending |
 | CONCEPT-03 | Phase 2 | Pending |
