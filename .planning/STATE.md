@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-06-08T08:55:22.645Z"
+stopped_at: Completed 02-05-PLAN.md
+last_updated: "2026-06-08T08:59:08.904Z"
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-06-08)
 ## Current Position
 
 Phase: 02 (content-conversion-spine) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 
 ## Performance Metrics
 
@@ -53,6 +53,7 @@ Plan: 2 of 5
 | Phase 02 P02 | 2min | 3 tasks | 3 files |
 | Phase 02 P03 | 1.5min | 3 tasks | 3 files |
 | Phase 02 P04 | 2min | 3 tasks | 5 files |
+| Phase 02 P05 | 2min | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,8 @@ Recent decisions affecting current work:
 - [Phase 02]: Content lives in a typed build-time data/*.ts layer (no fetch/CMS); swapping real values is a one-file edit, documented in repo-root ASSETS-NEEDED.md.
 - [Phase 02]: All v1 content ships as clearly-marked PLACEHOLDER with honest 'Season 1 - founding sponsors wanted' framing so no section renders empty; Formspree endpoint via NEXT_PUBLIC_FORMSPREE_ENDPOINT env with site.formspreeFallbackId fallback.
 - [Phase 02]: Submit control is a native <button type=submit> styled to match CTAButton so the no-JS native Formspree submit path works.
+- [Phase 02]: Phase-2 hero is intentionally static/CSS-only (no WebGL); HeroHeader.tsx is the isolated swap point for the Phase 3 poster / Phase 4 WebGL beat.
+- [Phase 02]: Locked conversion order assembled in app/page.tsx (thin composition root) wrapped once in SmoothScroll; Lineage sits before the final SponsorCTA.
 
 ### Pending Todos
 
@@ -94,6 +97,6 @@ Note: PROJECT.md header counts "24 reqs" but the enumerated v1 list contains 26 
 
 ## Session Continuity
 
-Last session: 2026-06-08T08:55:17.231Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-06-08T08:59:08.719Z
+Stopped at: Completed 02-05-PLAN.md
 Resume file: None

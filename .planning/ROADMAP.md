@@ -53,7 +53,7 @@ Plans:
 - [x] 02-02-PLAN.md — Concept + HowItWorks + Lineage sections (UFC→UFB→UFA, credits/money)
 - [x] 02-03-PLAN.md — MatchShowcase (mobile-safe media) + PrizePool + Standings teaser
 - [x] 02-04-PLAN.md — Sponsor-value + logo wall + Traction strip + working Formspree form + repeated CTA + Footer
-- [ ] 02-05-PLAN.md — Static hero header + page assembly (SmoothScroll) + real metadata
+- [x] 02-05-PLAN.md — Static hero header + page assembly (SmoothScroll) + real metadata
 
 ### Phase 3: Hero — Static Poster Baseline (Sendable Gate)
 **Goal**: The first screen hits the visitor with a cinematic showpiece that conveys "Ultimate Agent Fight" and high energy, states the one-line value as readable text, and surfaces the primary sponsor CTA — all rendered from a static poster image with zero risky JS, so it is the guaranteed first paint and the reduced-motion target. After this phase the page is genuinely impressive and **fully sendable**; the WebGL beat that follows is optional.

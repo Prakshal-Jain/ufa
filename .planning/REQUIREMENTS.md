@@ -47,9 +47,9 @@ Single epic-scrolling cinematic landing page (Next.js static export → GitHub P
 
 ### Motion & Experience
 
-- [ ] **MOTION-01**: Scroll-driven cinematic motion (reveals, parallax, depth) animates the sections
+- [x] **MOTION-01**: Scroll-driven cinematic motion (reveals, parallax, depth) animates the sections
 - [x] **MOTION-02**: All motion is disabled/reduced when `prefers-reduced-motion` is set; the page is fully readable and usable without motion (reduced path is the base case)
-- [ ] **MOTION-03**: Page holds ~60fps on a mid-tier phone — animations are limited to `transform`/`opacity`/`filter` and avoid layout-shifting properties
+- [x] **MOTION-03**: Page holds ~60fps on a mid-tier phone — animations are limited to `transform`/`opacity`/`filter` and avoid layout-shifting properties
 
 ### Quality
 
@@ -104,8 +104,8 @@ Mapped to phases in ROADMAP.md. Every v1 requirement maps to exactly one phase. 
 | SPON-03 | Phase 2 | Complete |
 | SPON-04 | Phase 2 | Complete |
 | SPON-05 | Phase 2 | Complete |
-| MOTION-01 | Phase 2 | Pending |
-| MOTION-03 | Phase 2 | Pending |
+| MOTION-01 | Phase 2 | Complete |
+| MOTION-03 | Phase 2 | Complete |
 | HERO-01 | Phase 3 | Pending |
 | HERO-02 | Phase 3 | Pending |
 | HERO-03 | Phase 3 | Pending |
