@@ -117,8 +117,8 @@ export default async function Home() {
               <a className="btn btn-red" href={SPONSOR_PAGE}>
                 Become a Sponsor
               </a>
-              <a className="btn btn-line" href={events.length ? "#schedule" : "#format"}>
-                {events.length ? "See the Schedule" : "See How It Works"}
+              <a className="btn btn-white" href="https://luma.com/agent-security-workshop-with-prakshal-ja" target="_blank" rel="noopener noreferrer">
+                Participate
               </a>
             </div>
             <div className="facts">

@@ -178,11 +178,18 @@ section {
   transform: translateY(1px);
 }
 .btn-red {
-  color: #0a0a0a;
+  color: #fff;
   background: var(--red);
 }
 .btn-red:hover {
   background: var(--red-bright);
+  transform: translateY(-2px);
+}
+.btn-white {
+  color: #0a0a0a;
+  background: #fff;
+}
+.btn-white:hover {
   transform: translateY(-2px);
 }
 .btn-line {
