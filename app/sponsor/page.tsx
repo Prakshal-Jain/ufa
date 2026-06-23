@@ -91,7 +91,7 @@ export default function Sponsor() {
             <Reveal className="head">
               <span className="kicker"><span className="index">02</span>&nbsp;/&nbsp;Criteria</span>
               <h2>Pick a layer. Pick a level.</h2>
-              <p>One sponsor per layer across compute, model, memory, and security. Most benefits are non-exclusive, so several brands can join. Only the top tier is single-buyer.</p>
+              <p>One sponsor per layer of the agent stack, such as compute, model, memory, database, multi-agent orchestration, and security. Most benefits are non-exclusive, so several brands can join. Only the top tier is single-buyer.</p>
             </Reveal>
             <Reveal>
               <ul className="ask">
@@ -136,7 +136,7 @@ export default function Sponsor() {
               <div className="box">
                 <span className="kicker">Let&apos;s Talk</span>
                 <h2>Pick a layer. Own it.</h2>
-                <p>Compute, model, memory, or security: tell us where your stack fits and we&apos;ll build the deal around it. Slots are limited.</p>
+                <p>Compute, model, memory, database, orchestration, security, or wherever else your stack fits: tell us and we&apos;ll build the deal around it. Slots are limited.</p>
                 <div className="cta">
                   <a className="btn btn-dark" href={CALENDAR} target="_blank" rel="noopener noreferrer">Schedule a Call</a>
                   <a className="btn btn-outline-dark" href={`mailto:${EMAIL}?subject=UFA%20Sponsorship`}>Email Us</a>
