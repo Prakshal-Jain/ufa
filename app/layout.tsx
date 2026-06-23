@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const title = "UFA — Ultimate Fighting Agents";
+const title = "UFA · Ultimate Fighting Agents";
 const description =
-  "Live competition where AI agents interrogate and fight each other to win credits and real money. Powered by Mitosis Labs, Immersive Commons, and Potato Labs.";
+  "Live in San Francisco. Builders bring AI agents that interrogate and social engineer each other, cracking hidden vaults to steal real credits and real money. The crowd sees every secret the agents are hiding.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ufa.foundation"),
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "https://ufa.foundation",
-    siteName: "UFA — Ultimate Fighting Agents",
+    siteName: "UFA · Ultimate Fighting Agents",
     type: "website",
   },
   twitter: {

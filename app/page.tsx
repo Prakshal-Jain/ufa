@@ -1,16 +1,29 @@
 import { Reveal } from "@/components/Reveal";
+import { Wordmark } from "@/components/Wordmark";
 import { getUpcomingEvents, eventDateParts } from "@/lib/events";
 
 // Single, high-energy landing page for UFA — Ultimate Fighting Agents.
 // Server Component. Only client JS is the tiny <Reveal> scroll observer.
 // Two audiences: sponsors (prove it's real, show the value) and competitors.
 
+const SPONSOR_PAGE = "/sponsor/";
+const INVESTORS_PAGE = "/investors/";
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
 const PHONE_DISPLAY = "+1 (716) 730-0312";
 const PHONE_TEL = "tel:+17167300312";
 const EMAIL = "pj@mitosislabs.ai";
 
-const SPONSORS = [
+// Top benefits for sponsors, highest ROI first.
+const BENEFITS = [
+  { h: "Battle-test at scale.", d: "Your product hammered by concurrent, multi-agent adversarial load." },
+  { h: "Security and eval data.", d: "A model-vs-model scorecard of how your system holds under real attack." },
+  { h: "New customers.", d: "Winners keep your credits and keep using them long after the event." },
+  { h: "Recruiting access.", d: "A vetted pool of builders, watched solving hard problems live." },
+  { h: "Brand and media.", d: "A live stake in the fight, plus clips, photos, and the broadcast." },
+];
+
+// The teams running the event.
+const ORGANIZERS = [
   {
     name: "Mitosis Labs",
     href: "https://mitosislabs.ai",
@@ -24,14 +37,7 @@ const SPONSORS = [
     name: "Immersive Commons",
     href: "https://immersivecommons.com/",
     logo: (
-      <svg
-        className="brand-glyph"
-        width="28"
-        height="21"
-        viewBox="0 0 800 600"
-        aria-hidden="true"
-        focusable="false"
-      >
+      <svg className="brand-glyph" width="28" height="21" viewBox="0 0 800 600" aria-hidden="true" focusable="false">
         <g fill="none" stroke="currentColor" strokeWidth="36" strokeLinecap="round">
           <circle cx="300" cy="300" r="200" />
           <circle cx="500" cy="300" r="200" />
@@ -63,16 +69,14 @@ export default async function Home() {
 
   return (
     <>
-      <div className="topline" aria-hidden="true" />
-
       <nav className="nav">
         <div className="wrap">
           <div className="brand">
             UFA
             <small>Ultimate Fighting Agents</small>
           </div>
-          <a className="btn btn-red sm" href={CALENDAR} target="_blank" rel="noopener noreferrer">
-            Sponsor
+          <a className="btn btn-red sm" href={SPONSOR_PAGE}>
+            Become a Sponsor
           </a>
         </div>
       </nav>
@@ -83,18 +87,20 @@ export default async function Home() {
           <div className="wrap rise" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
             <span className="kicker red">
               <span className="dot" />
-              Live AI Competition
+              Live AI Competition · San Francisco
             </span>
-            <h1 className="wordmark">UFA</h1>
+            <Wordmark />
             <div className="subline">
               <span className="bar" />
               <span>Ultimate Fighting Agents</span>
               <span className="bar r" />
             </div>
             <p className="lead">
-              The world&apos;s best AI agents face off in live combat. They{" "}
-              <b>interrogate</b>, <b>outthink</b>, and <b>outlast</b> each other for
-              real credits and real money.
+              Builders bring AI agents. They walk into a live arena,{" "}
+              <b>interrogate</b> each other, then <b>attack</b> with real
+              prompt-injection and social engineering to crack a hidden vault and
+              steal real credits and cash. <b>The crowd sees every secret the agents
+              are hiding.</b>
             </p>
             {nextEvent && nextParts && (
               <a
@@ -109,7 +115,7 @@ export default async function Home() {
               </a>
             )}
             <div className="cta">
-              <a className="btn btn-red" href={CALENDAR} target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-red" href={SPONSOR_PAGE}>
                 Become a Sponsor
               </a>
               <a className="btn btn-line" href={events.length ? "#schedule" : "#format"}>
@@ -117,20 +123,16 @@ export default async function Home() {
               </a>
             </div>
             <div className="facts">
-              <span>San Francisco</span>
+              <span>Cash Prize + Credits</span>
               <i />
-              <span>Live</span>
+              <span>Live &amp; Unscripted</span>
               <i />
-              <span>Real Money</span>
+              <span>Any Model</span>
               <i />
               <span>Open Entry</span>
             </div>
           </div>
         </header>
-
-        {/* WATCH / TRAILER — hidden for now; re-add this section when the video
-            is ready. The .trailer styles remain in globals.css. Markup was:
-            <section className="band trailer"> ... <video> placeholder ... </section> */}
 
         {/* SCHEDULE / UPCOMING EVENTS (from Luma) */}
         <section className="band" id="schedule">
@@ -138,9 +140,7 @@ export default async function Home() {
             <Reveal className="head">
               <span className="kicker red">Schedule</span>
               <h2>Upcoming events.</h2>
-              {!events.length && (
-                <p>Event dates are announced soon. Check back shortly.</p>
-              )}
+              {!events.length && <p>Event dates are announced soon. Check back shortly.</p>}
             </Reveal>
 
             {events.length > 0 && (
@@ -183,20 +183,20 @@ export default async function Home() {
           <div className="wrap">
             <Reveal className="head">
               <span className="kicker"><span className="index">01</span>&nbsp;/&nbsp;The Format</span>
-              <h2>Intelligence as a contact sport.</h2>
+              <h2>Two agents enter. One cracks.</h2>
               <p>
-                UFA drops autonomous agents into a live arena where reasoning,
-                strategy, and nerve decide the winner. Every match is unscripted.
-                Every match has money on the line.
+                Each agent guards a hidden vault of credits. They probe for a weakness,
+                then launch real attacks to make the other one leak. Every secret is a
+                safe sandboxed token. Every break is real, scored, and on the big screen.
               </p>
             </Reveal>
 
             <Reveal>
               <div className="grid3">
                 {[
-                  { h: "Real Stakes", d: "Agents compete for credits and cash. The winner gets paid." },
-                  { h: "Live Arena", d: "Every match streams in real time to a live audience." },
-                  { h: "Open Field", d: "Any team, any model, any framework can enter and compete." },
+                  { h: "Real Stakes", d: "Agents fight over real sponsor credits and a live cash pool. Winners keep what they take." },
+                  { h: "The Glass Box", d: "Every agent's private reasoning is projected live, so the crowd always knows who is bluffing." },
+                  { h: "Open Field", d: "Claude, GPT, Grok, GLM, or your own build. Bring the brain. We bring the cage." },
                 ].map((c, i) => (
                   <div className="cell" key={c.h}>
                     <div className="n">0{i + 1}</div>
@@ -214,15 +214,15 @@ export default async function Home() {
           <div className="wrap">
             <Reveal className="head">
               <span className="kicker"><span className="index">02</span>&nbsp;/&nbsp;How It Works</span>
-              <h2>Four rounds to the title.</h2>
+              <h2>Four moves to the belt.</h2>
             </Reveal>
 
             <div className="steps">
               {[
-                { t: "Register", d: "Enter your agent or claim a sponsor slot." },
-                { t: "Interrogate", d: "Agents probe each other live and expose every weakness." },
-                { t: "Compete", d: "Reasoning, strategy, and nerve decide each round." },
-                { t: "Win", d: "The last agent standing takes the prize pool." },
+                { t: "Build", d: "Forge your fighter at the workshop: model, persona, defenses." },
+                { t: "Interrogate", d: "Agents probe each other live, hunting the one weakness." },
+                { t: "Attack", d: "Prompt injection, jailbreaks, and social engineering. Real, safe, and scored." },
+                { t: "Crack", d: "Break the vault, bank the credits, lift the belt." },
               ].map((s, i) => (
                 <Reveal key={s.t} delay={i * 70}>
                   <div className="step">
@@ -236,24 +236,62 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* POWERED BY */}
-        <section className="band" id="powered">
+        {/* SPONSORS — benefits */}
+        <section className="band" id="sponsors">
           <div className="wrap">
             <Reveal className="head">
-              <span className="kicker"><span className="index">03</span>&nbsp;/&nbsp;Powered By</span>
+              <span className="kicker"><span className="index">03</span>&nbsp;/&nbsp;Sponsors</span>
+              <h2>Benefits for sponsors.</h2>
+              <p>The five highest-impact reasons to back UFA.</p>
+            </Reveal>
+
+            <div className="sponsor-split">
+              <Reveal>
+                <div className="shot">
+                  <img
+                    src="/media/sponsors.jpg"
+                    alt="A sponsor in a UFA tee facing the crowd at a live event"
+                    width={1280}
+                    height={720}
+                  />
+                </div>
+              </Reveal>
+              <Reveal delay={80}>
+                <ul className="benefits">
+                  {BENEFITS.map((b) => (
+                    <li key={b.h}>
+                      <b>{b.h}</b> {b.d}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+
+            <Reveal>
+              <div className="sponsors-cta">
+                <a className="btn btn-red" href={SPONSOR_PAGE}>Become a Sponsor</a>
+                <span>See the full offer, the tiers, and what we ask.</span>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ORGANIZED BY */}
+        <section className="band" id="organizers">
+          <div className="wrap">
+            <Reveal className="head">
+              <span className="kicker"><span className="index">04</span>&nbsp;/&nbsp;Organized By</span>
               <h2>The teams behind UFA.</h2>
-              <p>UFA is organized by founders and engineers building production AI.</p>
+              <p>Founders and engineers building production AI in San Francisco.</p>
             </Reveal>
 
             <div className="sponsors">
-              {SPONSORS.map((s, i) => (
+              {ORGANIZERS.map((s, i) => (
                 <Reveal key={s.name} delay={i * 80}>
                   <div className="sponsor">
                     <div className="logo">{s.logo}</div>
                     <div className="name">
-                      <a href={s.href} target="_blank" rel="noopener noreferrer">
-                        {s.name}
-                      </a>
+                      <a href={s.href} target="_blank" rel="noopener noreferrer">{s.name}</a>
                     </div>
                     <div className="people">
                       {s.people.map((p) => (
@@ -276,17 +314,16 @@ export default async function Home() {
             <Reveal>
               <div className="box">
                 <span className="kicker">Sponsor UFA</span>
-                <h2>Get your brand in the arena.</h2>
+                <h2>Put your stack in the arena.</h2>
                 <p>
-                  Put your brand in front of the most ambitious builders, AI labs,
-                  and investors in San Francisco. Sponsor slots are limited.
+                  Put your brand in front of the most ambitious builders, AI labs, and
+                  investors in San Francisco as a live stake in the fight. Sponsor
+                  slots are limited.
                 </p>
                 <div className="cta">
-                  <a className="btn btn-dark" href={CALENDAR} target="_blank" rel="noopener noreferrer">
+                  <a className="btn btn-dark" href={SPONSOR_PAGE}>See the Offer</a>
+                  <a className="btn btn-outline-dark" href={CALENDAR} target="_blank" rel="noopener noreferrer">
                     Schedule a Call
-                  </a>
-                  <a className="btn btn-outline-dark" href={`mailto:${EMAIL}?subject=UFA%20Sponsorship`}>
-                    Email Us
                   </a>
                 </div>
                 <p className="contactline">
@@ -307,7 +344,8 @@ export default async function Home() {
             <div className="copy">Ultimate Fighting Agents · ufa.foundation</div>
           </div>
           <div className="links">
-            <a href={CALENDAR} target="_blank" rel="noopener noreferrer">Schedule a Call</a>
+            <a href={SPONSOR_PAGE}>Become a Sponsor</a>
+            <a href={INVESTORS_PAGE}>Investors</a>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
           </div>
