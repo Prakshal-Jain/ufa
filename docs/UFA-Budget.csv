@@ -1,0 +1,51 @@
+Category,Item,Qty,Unit,Unit low,Unit high,Line mid (USD),Funding,Priority,Notes / source
+Prize & participant,Cash prize pool,1,pool,50000,50000,50000,Sponsor-funded,Essential,Sponsor cash floor
+Prize & participant,Compute/API credits prize (1M),1,pool,0,0,0,Sponsor in-kind,Essential,In-kind
+Prize & participant,Prize payout processing + admin,1,~3% cash,500,1500,1200,Cash,Essential,~3%
+Venue,Venue rental (Frontier Tower),1,event,0,3500,0,TBD / Partner,Essential,Likely in-kind
+AV & production,Stage lighting package,1,event,1500,2500,2000,TBD,Recommended,Reduce to basic wash
+AV & production,PA / sound system + mixer,1,event,1000,2000,1500,TBD,Essential,
+AV & production,Wireless mics,4,mic,200,300,1000,TBD,Essential,
+AV & production,Projector + screen (owned),1,event,0,300,0,Owned,Essential,Projector already owned; may need a projection surface (~$0-300)
+AV & production,AV technicians,3,day,400,600,1500,TBD,Essential,
+AV & production,Stage deck + furniture,1,event,1500,3000,2000,TBD,Essential,Reduce
+AV & production,Dedicated internet hardline,1,event,1000,1500,1200,Cash,Essential,
+Livestream,Multi-cam livestream package,1,event,4000,6000,5000,Cash,Essential,Reduce: DIY 1-2 cam
+Livestream,Streaming software,3,month,0,99,150,Cash,Essential,
+Livestream,Stream to YouTube/Twitch,1,event,0,0,0,Free,Essential,Free
+Catering & beverage,Event catering (heavy apps),100,person,45,95,8450,Cash,Essential,Reduce: lighter menu
+Catering & beverage,Workshop food + coffee,15,person,15,35,490,Cash,Essential,
+Catering & beverage,Beverages (beer/wine + NA),100,person,18,28,2200,Cash,Optional,Cut alcohol -> NA only saves most
+Catering & beverage,Bartenders,2,event,380,600,760,Cash,Optional,Only if alcohol
+Staffing & talent,Event coordinator / manager,1,event,1200,2500,2000,Cash,Essential,
+Staffing & talent,Event staff,4,event,270,320,1100,Cash,Essential,
+Staffing & talent,Registration / check-in staff,2,event,230,280,460,Cash,Essential,
+Staffing & talent,Security guards,2,event,225,340,450,Cash,Essential,Reduce to 2
+Staffing & talent,MC / host,1,event,735,1500,1000,Cash,Essential,
+Staffing & talent,DJ,1,event,800,1500,1100,Cash,Optional,Cut also removes $558 permit
+Photo / video,Event photographer,1,day,2400,3800,2600,Cash,Recommended,Sponsor media asset
+Photo / video,Videographer + highlight reel,1,event,2500,5000,3500,Cash,Recommended,Sponsor media asset
+Insurance & permits,Special-event GL insurance,1,event,150,321,225,Cash,Essential,Venue requires
+Insurance & permits,Liquor liability add-on,1,event,150,450,250,Cash,Optional,Only if alcohol
+Insurance & permits,SF indoor entertainment permit,1,event,558,558,558,Cash,Optional,Only if DJ/entertainment
+Insurance & permits,SF fire place-of-assembly permit,1,event,100,400,250,TBD,Essential,Venue may hold
+Insurance & permits,SF DPH temporary food permit,1,event,150,400,250,TBD,Essential,Venue may hold
+Branding & goods,T-shirts,100,shirt,6.5,9.5,800,Cash,Recommended,
+Branding & goods,Hoodies,30,hoodie,33,60,1260,Cash,Optional,
+Branding & goods,Championship belt,1,flat,199,800,450,Cash,Essential,"Hero prop, cheap"
+Branding & goods,Trophies / awards,6,trophy,40,150,450,Cash,Optional,Belt is the main prize
+Branding & goods,3D-printed props/figurines,100,item,1,2.5,150,Owned,Optional,"Owned printer, cheap"
+Branding & goods,Step-and-repeat backdrop + stand,1,flat,250,400,322,Cash,Recommended,High photo ROI
+Branding & goods,Vinyl banners,2,banner,40,80,100,Cash,Optional,
+Branding & goods,Foam-board signs,6,sign,15,40,150,Cash,Optional,
+Branding & goods,Name badges,150,badge,1,4,375,Cash,Essential,Reduce: print inserts
+Branding & goods,Lanyards,150,lanyard,0.21,1,75,Cash,Essential,
+Branding & goods,Stickers,250,sticker,0.75,2.25,313,Cash,Optional,
+Branding & goods,Basic swag,100,item,0.5,5,200,Cash,Optional,
+Software & tools,Canva Pro,3,month,15,15,45,Cash,Essential,
+Software & tools,Figma (optional),3,month,0,15,36,Cash,Optional,Canva may suffice
+Software & tools,Luma ticketing,1,event,0,0,0,Free,Essential,Free
+Embodiment / tech,8x Pico 4 Ultra headsets,8,unit,0,0,0,Owned,Optional,Owned; VR is a premium accent
+Embodiment / tech,VR Arena Cube content dev,1,project,0,8000,0,TBD,Optional,Hire XR dev = $5-15K; internal $0
+Embodiment / tech,FreeMoCap rig (cameras),1,setup,0,500,200,TBD,Optional,Walkout accent
+Embodiment / tech,Compute / inference,1,event,0,0,0,Sponsor in-kind,Essential,In-kind
