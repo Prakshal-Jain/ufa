@@ -1,6 +1,11 @@
 # UFA — The Plan, in Plain Words
 
-*A night where people bring AI agents that fight each other. Last updated: 2026-06-21.*
+*A night where people bring AI agents that fight each other. Last updated: 2026-06-24.*
+
+> **Status (2026-06-24):** the website is built and live (hero RSVP → `luma.com/wig1dbor`, plus `/sponsor` and
+> `/investors` pages). The sponsorship one-pager (`public/UFA-Sponsorship-One-Pager.pdf`) and the event budget
+> (`docs/UFA-Budget.xlsx`, ~$27–45K UFA cash + a $50K sponsor-funded prize) are drafted. Luma cover is
+> `docs/UFA-Luma-Cover.png`. Full detail and open flags are in `UFA-MASTER-PLAN.md` §0.*
 
 ---
 

@@ -14,7 +14,46 @@
 > and the **Pico + MoCap + Prusa embodiment layer** (pulled forward from "V3"). Where this doc is silent on
 > mechanics, `UFA-EVENT-PLAN.md` is the source of truth.
 >
-> _Last updated: 2026-06-21._
+> _Last updated: 2026-06-24._
+
+---
+
+## 0. Status (2026-06-24) — build, budget, Luma, open flags
+
+**Website (live at ufa.foundation; GitHub Pages from `main` via `.github/workflows/deploy.yml`):**
+- Landing page rebuilt. Hero = venue photo background + a flag-reveal **UFA** wordmark (white by default; a
+  cursor-following organic CSS-mask spotlight reveals a US-flag fill). Code: `components/Wordmark.tsx`,
+  `public/media/wordmark-white.png` / `wordmark-flag.png`, hero bg `public/media/hero.jpg`.
+- Hero one-liner: *"World's first and only live arena where builders' AI agents interrogate each other, then
+  attack with real prompt-injection and social engineering to crack a hidden vault and steal real credits and cash."*
+- Hero CTA = **RSVP → main event Luma `https://luma.com/wig1dbor`**.
+- Sponsors section = "Benefits for sponsors" (5 ROI bullets) + event photo (`public/media/sponsors.jpg`).
+  **Sponsor names are NOT shown publicly yet** (unconfirmed).
+- **`/sponsor`** one-pager page (What you get / Criteria / What we ask / Every match produces, plus a
+  "Download One-Pager" button → `public/UFA-Sponsorship-One-Pager.pdf`). **`/investors`** page (thesis +
+  opportunity), linked from the footer.
+- Copy style locked: confident, plain, no em dashes, "social engineer" not "hack", no negative parallelisms.
+
+**Sponsorship one-pager:** `public/UFA-Sponsorship-One-Pager.pdf` (source `docs/sponsorship-memo.html`,
+rendered via headless Chrome `--print-to-pdf`). Criteria is deliberately non-exhaustive: *"one sponsor per layer
+of the agent stack, such as compute, model, memory, database, multi-agent orchestration, and security."*
+Tiers Bronze / Silver / Gold (Rayyan's sheet).
+
+**Budget:** `docs/UFA-Budget.xlsx` (+ `.csv`), grounded in researched SF 2025-26 rates (venue/AV/livestream,
+catering/staffing/insurance, merch/printing). Assumptions: **100 spectators**, ~24 competitors, ~15 workshop;
+**projector owned (no LED wall)**; heavy-apps menu + beer/wine bar. Optional rows shaded gray at the bottom.
+Totals (mid + 20% buffer), assuming Frontier Tower covers venue + AV: **Lean ~$27K / +Recommended ~$36K /
+Full ~$45K UFA cash**; worst case (UFA pays venue+AV) ~$55K; **plus the $50K sponsor-funded prize pool**
+(pass-through). To be sent to Rayyan for review.
+
+**Luma:** main event `luma.com/wig1dbor` (cover `docs/UFA-Luma-Cover.png`, 2160×2160; recommended Luma theme
+Minimal + Dark + red accent, font Geist Mono; suggested title "Ultimate Fighting Agents: The UFC of AI").
+Workshop = `luma.com/agent-security-workshop-with-prakshal-ja`.
+
+**Open flags:**
+1. Confirm **Nebius, z.ai, TiDB are cleared to be named publicly** before listing them on the live site or in
+   public assets.
+2. The fight-lab real run (§10 gate) still needs an LLM API key to produce the crack-rate distribution.
 
 ---
 
