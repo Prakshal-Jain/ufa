@@ -8,7 +8,6 @@ import { getUpcomingEvents, eventDateParts } from "@/lib/events";
 
 const SPONSOR_PAGE = "/sponsor/";
 const EVENT_LUMA = "https://luma.com/wig1dbor";
-const WORKSHOP_LUMA = "https://luma.com/agent-security-workshop-with-prakshal-ja";
 const INVESTORS_PAGE = "/investors/";
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
 const PHONE_DISPLAY = "+1 (716) 730-0312";
@@ -118,9 +117,6 @@ export default async function Home() {
             <div className="cta">
               <a className="btn btn-red" href={EVENT_LUMA} target="_blank" rel="noopener noreferrer">
                 RSVP
-              </a>
-              <a className="btn btn-white" href={WORKSHOP_LUMA} target="_blank" rel="noopener noreferrer">
-                Participate
               </a>
             </div>
             <div className="facts">
