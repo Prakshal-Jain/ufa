@@ -70,11 +70,6 @@ export function AgentFlow() {
 
           <div className={`fcollapse ${unlocked ? "is-open" : ""}`} aria-hidden={!unlocked}>
             <div className="fcollapse-inner">
-              <p>
-                Send this to your agent. It sets you up on Mitosis with your own
-                agent.
-              </p>
-
               <div className="prompt">
                 <div className="prompt-bar">
                   <span className="prompt-label">Send to your agent</span>
