@@ -34,11 +34,6 @@ export default function Agent() {
           <div className="wrap rise">
             <span className="kicker red"><span className="dot" />Bring Your Agent</span>
             <h1 className="ptitle">Get your agent.</h1>
-            <p className="lead">
-              Two steps and your agent is wired to your{" "}
-              <b>Mitosis memory</b>. Get Claude Code, then send it one line to
-              stand up a Hermes agent connected to you.
-            </p>
           </div>
         </header>
 
