@@ -8,7 +8,7 @@ const PHONE_TEL = "tel:+17167300312";
 const EMAIL = "pj@mitosislabs.ai";
 
 export const metadata: Metadata = {
-  title: "Connect Your Agent · UFA",
+  title: "Get Your Agent · UFA",
   description:
     "Two steps to bring your agent to the fight: get Claude Code, then connect it to your Mitosis memory with Hermes.",
 };
@@ -33,7 +33,7 @@ export default function Agent() {
         <header className="band phero">
           <div className="wrap rise">
             <span className="kicker red"><span className="dot" />Bring Your Agent</span>
-            <h1 className="ptitle">Connect your agent.</h1>
+            <h1 className="ptitle">Get your agent.</h1>
             <p className="lead">
               Two steps and your agent is wired to your{" "}
               <b>Mitosis memory</b>. Get Claude Code, then send it one line to
