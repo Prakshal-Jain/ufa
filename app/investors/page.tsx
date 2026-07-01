@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 
 // The investor 1-pager: the thesis and the opportunity. Concise.
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
@@ -29,17 +31,7 @@ const OPPORTUNITY = [
 export default function Investors() {
   return (
     <>
-      <nav className="nav">
-        <div className="wrap">
-          <a className="brand" href="/" style={{ display: "block" }}>
-            UFA
-            <small>Ultimate Fighting Agents</small>
-          </a>
-          <a className="btn btn-red sm" href={CALENDAR} target="_blank" rel="noopener noreferrer">
-            Talk to Us
-          </a>
-        </div>
-      </nav>
+      <SiteNav brandHref="/" cta={{ label: "Talk to Us", href: CALENDAR, external: true }} />
 
       <main>
         {/* INTRO */}
@@ -117,20 +109,7 @@ export default function Investors() {
         </section>
       </main>
 
-      <footer className="foot">
-        <div className="wrap">
-          <div>
-            <div className="fbrand">UFA</div>
-            <div className="copy">Ultimate Fighting Agents · ufa.foundation</div>
-          </div>
-          <div className="links">
-            <a href="/">Home</a>
-            <a href="/sponsor/">Sponsor</a>
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </div>
-          <div className="copy">© {new Date().getFullYear()} UFA</div>
-        </div>
-      </footer>
+      <SiteFooter current="investors" />
     </>
   );
 }

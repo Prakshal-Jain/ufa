@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 
 // The sponsor 1-pager: the offer and what we ask. Concise.
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
@@ -33,17 +35,7 @@ const ASK = [
 export default function Sponsor() {
   return (
     <>
-      <nav className="nav">
-        <div className="wrap">
-          <a className="brand" href="/" style={{ display: "block" }}>
-            UFA
-            <small>Ultimate Fighting Agents</small>
-          </a>
-          <a className="btn btn-red sm" href={CALENDAR} target="_blank" rel="noopener noreferrer">
-            Schedule a Call
-          </a>
-        </div>
-      </nav>
+      <SiteNav brandHref="/" cta={{ label: "Schedule a Call", href: CALENDAR, external: true }} />
 
       <main>
         {/* INTRO */}
@@ -152,20 +144,7 @@ export default function Sponsor() {
         </section>
       </main>
 
-      <footer className="foot">
-        <div className="wrap">
-          <div>
-            <div className="fbrand">UFA</div>
-            <div className="copy">Ultimate Fighting Agents · ufa.foundation</div>
-          </div>
-          <div className="links">
-            <a href="/">Home</a>
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
-          </div>
-          <div className="copy">© {new Date().getFullYear()} UFA</div>
-        </div>
-      </footer>
+      <SiteFooter current="sponsor" />
     </>
   );
 }

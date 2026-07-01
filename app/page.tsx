@@ -1,5 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { Wordmark } from "@/components/Wordmark";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 import { getUpcomingEvents, eventDateParts } from "@/lib/events";
 
 // Single, high-energy landing page for UFA — Ultimate Fighting Agents.
@@ -8,11 +10,7 @@ import { getUpcomingEvents, eventDateParts } from "@/lib/events";
 
 const SPONSOR_PAGE = "/sponsor/";
 const EVENT_LUMA = "https://luma.com/wig1dbor";
-const INVESTORS_PAGE = "/investors/";
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
-const PHONE_DISPLAY = "+1 (716) 730-0312";
-const PHONE_TEL = "tel:+17167300312";
-const EMAIL = "pj@mitosislabs.ai";
 
 // Top benefits for sponsors, highest ROI first.
 const BENEFITS = [
@@ -23,46 +21,6 @@ const BENEFITS = [
   { h: "Brand and media.", d: "A live stake in the fight, plus clips, photos, and the broadcast." },
 ];
 
-// The teams running the event.
-const ORGANIZERS = [
-  {
-    name: "Mitosis Labs",
-    href: "https://mitosislabs.ai",
-    logo: <img src="/sponsors/mitosis.svg" alt="Mitosis Labs" width={78} height={78} />,
-    people: [
-      { name: "Alex Morris", href: "https://x.com/cto_ya_know" },
-      { name: "Prakshal Jain", href: "https://x.com/prakshaljain_" },
-    ],
-  },
-  {
-    name: "Immersive Commons",
-    href: "https://immersivecommons.com/",
-    logo: (
-      <svg className="brand-glyph" width="28" height="21" viewBox="0 0 800 600" aria-hidden="true" focusable="false">
-        <g fill="none" stroke="currentColor" strokeWidth="36" strokeLinecap="round">
-          <circle cx="300" cy="300" r="200" />
-          <circle cx="500" cy="300" r="200" />
-        </g>
-      </svg>
-    ),
-    people: [{ name: "Rayyan Zahid", href: "https://x.com/rayyanzahidai" }],
-  },
-  {
-    name: "Potato Labs",
-    href: "https://www.linkedin.com/company/potatolabs/",
-    logo: <span className="emoji" role="img" aria-label="Potato Labs">🥔</span>,
-    people: [{ name: "Izn Tariq", href: "https://www.linkedin.com/in/izn-tariq/" }],
-  },
-];
-
-function XIcon() {
-  return (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
 export default async function Home() {
   const events = await getUpcomingEvents();
   const nextEvent = events[0] ?? null;
@@ -70,17 +28,7 @@ export default async function Home() {
 
   return (
     <>
-      <nav className="nav">
-        <div className="wrap">
-          <div className="brand">
-            UFA
-            <small>Ultimate Fighting Agents</small>
-          </div>
-          <a className="btn btn-red sm" href={SPONSOR_PAGE}>
-            Become a Sponsor
-          </a>
-        </div>
-      </nav>
+      <SiteNav cta={{ label: "Become a Sponsor", href: SPONSOR_PAGE }} />
 
       <main>
         {/* HERO */}
@@ -273,38 +221,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ORGANIZED BY */}
-        <section className="band" id="organizers">
-          <div className="wrap">
-            <Reveal className="head">
-              <span className="kicker"><span className="index">04</span>&nbsp;/&nbsp;Organized By</span>
-              <h2>The teams behind UFA.</h2>
-              <p>Founders and engineers building production AI in San Francisco.</p>
-            </Reveal>
-
-            <div className="sponsors">
-              {ORGANIZERS.map((s, i) => (
-                <Reveal key={s.name} delay={i * 80}>
-                  <div className="sponsor">
-                    <div className="logo">{s.logo}</div>
-                    <div className="name">
-                      <a href={s.href} target="_blank" rel="noopener noreferrer">{s.name}</a>
-                    </div>
-                    <div className="people">
-                      {s.people.map((p) => (
-                        <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
-                          {p.href.includes("x.com") && <XIcon />}
-                          {p.name}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* FINALE */}
         <section className="band finale">
           <div className="wrap">
@@ -323,32 +239,13 @@ export default async function Home() {
                     Schedule a Call
                   </a>
                 </div>
-                <p className="contactline">
-                  Call or text <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
-                  &nbsp;&nbsp;·&nbsp;&nbsp;
-                  <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-                </p>
               </div>
             </Reveal>
           </div>
         </section>
       </main>
 
-      <footer className="foot">
-        <div className="wrap">
-          <div>
-            <div className="fbrand">UFA</div>
-            <div className="copy">Ultimate Fighting Agents · ufa.foundation</div>
-          </div>
-          <div className="links">
-            <a href={SPONSOR_PAGE}>Become a Sponsor</a>
-            <a href={INVESTORS_PAGE}>Investors</a>
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <a href={PHONE_TEL}>{PHONE_DISPLAY}</a>
-          </div>
-          <div className="copy">© {new Date().getFullYear()} UFA</div>
-        </div>
-      </footer>
+      <SiteFooter current="home" />
     </>
   );
 }
