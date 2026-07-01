@@ -1035,6 +1035,12 @@ section {
 .foot .links a:hover {
   color: var(--fg);
 }
+.foot-x {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+}
+.foot-x:hover { color: var(--fg); }
 
 /* --- Scroll reveal -------------------------------------------------------- */
 .reveal {
