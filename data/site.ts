@@ -24,7 +24,8 @@ export const site = {
     sponsor: "sponsor",
   },
   socials: [
-    { label: "X", href: "https://x.com/" },
+    { label: "X", href: "https://x.com/ultimate_agents" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/showcase/ufa-ai/" },
     { label: "YouTube", href: "https://youtube.com/" },
     { label: "Twitch", href: "https://twitch.tv/" },
   ] as SocialLink[],

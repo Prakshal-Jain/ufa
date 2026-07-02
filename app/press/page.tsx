@@ -213,6 +213,12 @@ export default function Press() {
                 <a href="https://mitosislabs.ai" target="_blank" rel="noopener noreferrer">Mitosis Labs</a>.
                 For interviews, assets, or event access, use the press contact below.
               </p>
+              <p className="boiler-note">
+                Official channels:{" "}
+                <a href="https://ufa.foundation" target="_blank" rel="noopener noreferrer">ufa.foundation</a>,{" "}
+                <a href="https://x.com/ultimate_agents" target="_blank" rel="noopener noreferrer">X</a>,{" "}
+                <a href="https://www.linkedin.com/showcase/ufa-ai/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+              </p>
               <div className="boiler-cta">
                 <a className="btn btn-red" href={MEETING} target="_blank" rel="noopener noreferrer">Press Contact</a>
               </div>
