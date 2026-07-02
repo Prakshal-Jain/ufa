@@ -39,6 +39,8 @@ jobs:
           # Google Calendar secret iCal URL. Set in repo
           # Settings → Secrets and variables → Actions.
           GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
+          # Mitosis Labs API base (for investor magic-link gate).
+          NEXT_PUBLIC_MITOSIS_API_URL: https://mitosislabs.ai
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
