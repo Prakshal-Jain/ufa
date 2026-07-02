@@ -10,7 +10,7 @@ import { Reveal } from "@/components/Reveal";
 const API_BASE = process.env.NEXT_PUBLIC_MITOSIS_API_URL || "https://mitosislabs.ai";
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
 const PHONE_DISPLAY = "+1 (716) 730-0312";
-const PHONE_TEL = "tel:+171****0312";
+const PHONE_TEL = "tel:+17167300312";
 const EMAIL = "pj@mitosislabs.ai";
 const SESSION_KEY = "ufa_investor_token";
 
