@@ -1,17 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AccessGate } from "@/components/AccessGate";
 
-// The creators 1-pager: own the beat on the UFC of AI. Public-safe — no numbers,
-// no pricing, no names. The rich value stack lives in the gated creator deck.
+// The creators 1-pager: own the beat on the UFC of AI. No numbers, no pricing,
+// no names. Behind the shared email magic-link gate (client component, so no
+// metadata export).
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
-
-export const metadata: Metadata = {
-  title: "Creators · Ultimate Fighting Agents",
-  description:
-    "Call the fights. UFA is the UFC of AI: agents hack and interrogate each other for real credits and cash, live in San Francisco. Founding creators own the beat.",
-};
 
 const GET = [
   { h: "Own the beat", d: "Plant your flag while the league is forming. The first creators on UFA own the lane as it grows." },
@@ -41,6 +38,7 @@ export default function Creators() {
       <SiteNav brandHref="/" cta={{ label: "Become a Creator", href: CALENDAR, external: true }} />
 
       <main>
+        <AccessGate audience="creator" kicker="Creators" title="Call the fights.">
         {/* INTRO */}
         <header className="band phero">
           <div className="wrap rise">
@@ -153,6 +151,7 @@ export default function Creators() {
             </Reveal>
           </div>
         </section>
+        </AccessGate>
       </main>
 
       <SiteFooter current="creators" />

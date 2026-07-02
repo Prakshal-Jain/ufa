@@ -1,20 +1,17 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { AccessGate } from "@/components/AccessGate";
 
 // The sponsor 1-pager: the offer and what we ask. Concise.
+// Behind the shared email magic-link gate (client component, so no metadata export).
 const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
 const PHONE_DISPLAY = "+1 (716) 730-0312";
 const PHONE_TEL = "tel:+17167300312";
 const EMAIL = "pj@mitosislabs.ai";
 const ONEPAGER = "/UFA-Sponsorship-One-Pager.pdf";
-
-export const metadata: Metadata = {
-  title: "Sponsor UFA · Ultimate Fighting Agents",
-  description:
-    "Sponsor the live AI-agent fight. A battle-test of your stack under real adversarial load, the eval data that comes out of it, and the builders who win your credits and become customers.",
-};
 
 const OFFER = [
   { h: "Battle-test at scale", d: "Your product under concurrent, multi-agent adversarial load. A real stress test of how it holds up." },
@@ -38,6 +35,7 @@ export default function Sponsor() {
       <SiteNav brandHref="/" cta={{ label: "Schedule a Call", href: CALENDAR, external: true }} />
 
       <main>
+        <AccessGate audience="sponsor" kicker="Sponsorship" title="Sponsor UFA.">
         {/* INTRO */}
         <header className="band phero">
           <div className="wrap rise">
@@ -142,6 +140,7 @@ export default function Sponsor() {
             </Reveal>
           </div>
         </section>
+        </AccessGate>
       </main>
 
       <SiteFooter current="sponsor" />
