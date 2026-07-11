@@ -4,7 +4,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 
 // Press & brand kit: palette, logos, type, photography, boilerplate.
-const MEETING = "https://calendar.app.google/9xQDqvRJcg9ruhcDA";
+const MEETING = "https://mitosislabs.ai/chat/alex";
 
 export const metadata: Metadata = {
   title: "Press & Brand · Ultimate Fighting Agents",

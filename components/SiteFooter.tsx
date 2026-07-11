@@ -1,7 +1,7 @@
 // Shared footer. One source of truth for the nav links, the contact CTA, and the
 // trademark line, so every page stays in sync. Pass `current` to drop the link
 // to the page you're already on.
-const MEETING = "https://calendar.app.google/9xQDqvRJcg9ruhcDA";
+const MEETING = "https://mitosislabs.ai/chat/alex";
 const MITOSIS = "https://mitosislabs.ai";
 const X_URL = "https://x.com/ultimate_agents";
 const LINKEDIN_URL = "https://www.linkedin.com/showcase/ufa-ai/";

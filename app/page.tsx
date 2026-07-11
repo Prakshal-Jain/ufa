@@ -10,7 +10,7 @@ import { getUpcomingEvents, eventDateParts } from "@/lib/events";
 
 const SPONSOR_PAGE = "/sponsor/";
 const EVENT_LUMA = "https://luma.com/wig1dbor";
-const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
+const CALENDAR = "https://mitosislabs.ai/chat/alex";
 
 // Top benefits for sponsors, highest ROI first.
 const BENEFITS = [
@@ -205,7 +205,7 @@ export default async function Home() {
                 <ul className="benefits">
                   {BENEFITS.map((b) => (
                     <li key={b.h}>
-                      <b>{b.h}</b> {b.d}
+                      <b>{b.h}</b>
                     </li>
                   ))}
                 </ul>

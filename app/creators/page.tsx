@@ -8,7 +8,7 @@ import { AccessGate } from "@/components/AccessGate";
 // The creators 1-pager: own the beat on the UFC of AI. No numbers, no pricing,
 // no names. Behind the shared email magic-link gate (client component, so no
 // metadata export).
-const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
+const CALENDAR = "https://mitosislabs.ai/chat/alex";
 
 const GET = [
   { h: "Own the beat", d: "Plant your flag while the league is forming. The first creators on UFA own the lane as it grows." },

@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { AccessGate } from "@/components/AccessGate";
 
 // The investor 1-pager, behind the shared email magic-link gate.
-const CALENDAR = "https://calendar.app.google/fzqWnsaj5Wxkg3rB9";
+const CALENDAR = "https://mitosislabs.ai/chat/alex";
 const PHONE_DISPLAY = "+1 (716) 730-0312";
 const PHONE_TEL = "tel:+17167300312";
 const EMAIL = "pj@mitosislabs.ai";
