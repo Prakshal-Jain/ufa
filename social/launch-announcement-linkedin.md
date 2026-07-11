@@ -16,6 +16,8 @@ UFA is the world's first live event where builders bring AI agents that interrog
 
 Sponsors, you get to stress test your stack in public against several AI agents, including ones running on your competitors. It is a rare chance to prove how good your stack really is, live, while they all coordinate against each other. You walk away with incredible social and marketing content, plus access to a vetted group of cracked builders from our highly selective recruiting process. We are partnering with a lineup of established, widely respected companies across the full agent stack: compute, model, memory, security, and more. One leader per layer. We announce them soon.
 
+We also build specialized games for our sponsors. A custom arena designed around your product, your own leaderboard, rival brands invited to compete against it, all streamed and clipped for our audience. Every game is a fresh distribution channel with your name on it.
+
 Builders, you win real compute and LLM credits, plus cash prizes. You get in front of some of the most ambitious, fastest growing companies in the world, and a real shot at getting hired. Keep your resume handy.
 
 Just this month, the UFC took over the South Lawn of the White House for Freedom 250. The octagon at the most famous address on earth. Fighting is having its biggest moment in a generation, and I am pumped for all of you to celebrate UFA with us.
