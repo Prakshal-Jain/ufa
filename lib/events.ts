@@ -6,7 +6,10 @@
 // publish just those. If the URL is missing or the fetch fails, we return [] so
 // the site still builds and renders a graceful fallback.
 
+import { PINNED_EVENTS } from "@/data/events";
+
 const ICS_ENV = "GCAL_ICS_URL";
+// Events hand-pinned in data/events.ts are merged in on top of the feed.
 const MATCH = /\[ufa\]|ultimate\s+fighting\s+agents/i;
 // Timezone used for display only when the feed gives a UTC/floating time with no
 // zone of its own. Google's secret iCal normally carries a TZID per event.
@@ -26,6 +29,16 @@ export type UfaEvent = {
 type ParsedEvent = UfaEvent & { description: string | null };
 
 export async function getUpcomingEvents(limit = 6): Promise<UfaEvent[]> {
+  const now = Date.now();
+  const fromFeed = await getCalendarEvents();
+  const seen = new Set(fromFeed.map((e) => e.url).filter(Boolean));
+  return [...fromFeed, ...PINNED_EVENTS.filter((e) => !e.url || !seen.has(e.url))]
+    .filter((e) => new Date(e.endAt ?? e.startAt).getTime() >= now)
+    .sort((a, b) => new Date(a.startAt).getTime() - new Date(b.startAt).getTime())
+    .slice(0, limit);
+}
+
+async function getCalendarEvents(): Promise<UfaEvent[]> {
   const url = process.env[ICS_ENV];
   if (!url) {
     console.warn(`[events] ${ICS_ENV} not set — building without event dates.`);
@@ -45,8 +58,6 @@ export async function getUpcomingEvents(limit = 6): Promise<UfaEvent[]> {
       .filter((e) => MATCH.test(e.name) || (e.description ? MATCH.test(e.description) : false))
       // keep events that haven't ended yet
       .filter((e) => new Date(e.endAt ?? e.startAt).getTime() >= now)
-      .sort((a, b) => new Date(a.startAt).getTime() - new Date(b.startAt).getTime())
-      .slice(0, limit)
       .map(
         ({ id, name, startAt, endAt, timezone, allDay, url: u, location }): UfaEvent => ({
           id,

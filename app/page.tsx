@@ -63,7 +63,7 @@ export default async function Home() {
               </a>
             )}
             <div className="cta">
-              <a className="btn btn-red" href={EVENT_LUMA} target="_blank" rel="noopener noreferrer">
+              <a className="btn btn-red" href={nextEvent?.url ?? EVENT_LUMA} target="_blank" rel="noopener noreferrer">
                 RSVP
               </a>
             </div>
