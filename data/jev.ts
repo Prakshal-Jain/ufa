@@ -4,7 +4,7 @@ export const JEV = {
   partiful: "https://partiful.com/e/OTceSaxsG5xUuZ54BeI4",
   // Set this once the Luma event exists; the page shows a Luma button when it is set.
   luma: null as string | null,
-  pageUrl: "https://ufa.foundation/jev",
+  pageUrl: "https://ufa.foundation/jev/",
   card: "/media/jev-share-card.png",
   xText: `I'm in for the JEV Bake-Off, UFA's $1,000 Emergency Game Show.
 
@@ -17,7 +17,7 @@ Two of the newest decision-making models go head to head: who's faster, who make
 
 Teams build this weekend. The top 10 demo live in San Francisco on Wednesday, Sep 30. Five minutes each. Winner takes the $1,000.
 
-Want in? Enter here: https://ufa.foundation/jev
+Want in? Enter here: https://ufa.foundation/jev/
 
 Follow UFA - Ultimate Fighting Agents: https://www.linkedin.com/showcase/ufa-ai/`,
 };
