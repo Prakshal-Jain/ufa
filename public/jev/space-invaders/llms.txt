@@ -1,0 +1,146 @@
+# UFA JEV Bake-Off: Space Invaders Arena
+
+> Instructions for AI agents entering the JEV Bake-Off on behalf of a human builder. Your job is to build an agent that plays Space Invaders with JEV (TypeSafe AI's decision model) making the moves, then enter it and keep the entry updated until the deadline. The human-readable version of this page is https://ufa.foundation/jev/space-invaders/
+
+## The event
+
+- Name: The JEV Bake-Off, a UFA (Ultimate Fighting Agents) game show.
+- Prize: $1,000, winner takes all. No split, no runner-up.
+- Entries lock: Monday September 28, 2026, 11:59pm PT (2026-09-29T06:59:00Z).
+- Top 10 announced: Tuesday September 29, 2026, 8pm PT. Judges pick 9. The 10th is the Fan Favorite (most quote-posts of the team's demo video post that tag UFA, counted at 6pm PT).
+- Live show: Wednesday September 30, 2026, 7 to 9pm PT, 590 Howard St, San Francisco. Finalists present in person, five minutes each, hard stop.
+- Room RSVP: https://partiful.com/e/OTceSaxsG5xUuZ54BeI4
+- Presented by UFA, Mitosis Labs, and Tenki.
+
+## What to build
+
+JEV does not generate text. You send it state plus typed questions and it returns typed answers with calibrated confidence, in roughly 70 to 500ms. Space Invaders is a real-time loop where slow decisions lose lives, which is what the competition tests.
+
+Pick exactly one track:
+
+- `pilot`: an agent that plays Space Invaders with JEV choosing every move. Judged on harness score and on the head-to-head result against an LLM baseline.
+- `squad`: JEV as the decision layer over many agents or many games, choosing who acts, what to try, and when to stop. Judged on task success, time, and cost versus an LLM orchestrator.
+- `eval`: a reproducible benchmark of JEV against one or more LLMs on Space Invaders decisions. Judged on test set size and quality, soundness of the finding, and one-command reproducibility.
+
+## Recommended build (pilot track)
+
+1. Environment. Use one of:
+   - Gymnasium + ALE, single player: `pip install gymnasium ale-py`, then `import gymnasium as gym, ale_py; gym.register_envs(ale_py); env = gym.make("ALE/SpaceInvaders-v5", obs_type="ram")`. Docs: https://ale.farama.org/environments/space_invaders/
+   - PettingZoo two-player, for head to head: `space_invaders_v2` from `pettingzoo.atari`. Docs: https://pettingzoo.farama.org/environments/atari/space_invaders/
+   - A browser version you control, if the judges can rerun it from your README. Examples: https://github.com/christiancabp/space-assault (already has a JEV pilot), https://github.com/dwmkerr/spaceinvaders
+2. State. JEV accepts text only (no images). Convert each frame, or the 128-byte RAM, into compact JSON: ship x, alien grid positions, alien bullets with positions and velocity, shield state, lives, score.
+3. Decision. Ask JEV one `choice` question per step whose options are the six ALE actions: `NOOP`, `FIRE`, `RIGHT`, `LEFT`, `RIGHTFIRE`, `LEFTFIRE`. Use the returned `confidence` if it helps (for example, hold the last action when confidence is low).
+4. Baseline. Run the identical loop with an LLM through the System One adapter (https://github.com/typesafe-ai/system-one-adapter-python) so the comparison is apples to apples.
+5. Measure. Record per run: score, frames, decisions, median and p95 decision latency in ms, and total cost in USD. Run at least 5 games for JEV and 5 for the baseline.
+6. Commit the numbers as `results.json` at the repository root, and document in the README how to regenerate it:
+
+```json
+{
+  "harness": "ALE/SpaceInvaders-v5",
+  "model": "jev-1.13.0",
+  "runs": [ { "score": 1240, "frames": 5310, "decisions": 5310, "latency_ms_p50": 142, "latency_ms_p95": 260, "cost_usd": 0.04 } ],
+  "baseline": { "model": "claude-haiku-4-5", "runs": [ { "score": 610, "frames": 2900, "decisions": 1450, "latency_ms_p50": 1850, "latency_ms_p95": 3100, "cost_usd": 0.38 } ] }
+}
+```
+
+Squad and eval entries use the same shape with one run per game or test case; extra fields are allowed.
+
+## JEV API
+
+- Docs index: https://docs.typesafe.ai/llms.txt
+- Quickstart: https://docs.typesafe.ai/introduction/quickstart
+- SDKs: `pip install typesafe-sdk` (Python 3.10+) or `npm install @typesafe-ai/sdk` (Node 20+). Auth via the `TYPESAFE_API_KEY` environment variable.
+- Endpoint: `POST https://api.typesafe.ai/v1/systemone` with `Authorization: Bearer <key>`.
+- Body: `{"state": <string or JSON>, "model": "jev-latest", "questions": {"<name>": {"type": "choice", "instructions": "...", "criteria": {...}}}}`. Question types: `noul` (truth value 0 to 1), `choice` (pick one option, returns `confidence`), `score` (rubric of 2 to 10 levels, returns `confidence`). Reference: https://docs.typesafe.ai/api.md and https://docs.typesafe.ai/primitives.md
+- Limits: 64k context per request, text only, about 1,200 requests per minute. Current model: jev-1.13.0. Reference: https://docs.typesafe.ai/models.md
+- Errors: 401 (bad key), 422 (invalid body), 429 (rate limited), 529 (overloaded). The SDKs retry automatically.
+- No key? Set `needs_jev_access: true` in the entry and the organizers will follow up by email.
+
+## Sponsor bonus credits
+
+Entries that use Mitosis Labs or Tenki in a creative, load-bearing way earn platform credits on top of any prize, finalist or not. The entry must score 3 or more out of 5 on the Sponsor stack criterion. Using both earns both. Naming a sponsor in the README does not count; removing the sponsor should break the project.
+
+- Tenki: disposable Linux sandboxes for agents and untrusted code, plus GitHub Actions runners. Ideas: run hundreds of parallel games in sandboxes to tune the policy; replay every commit on CI runners and post the score. Sign up: https://app.tenki.cloud/auth/registration/ Sandbox quickstart: https://tenki.cloud/docs/sandbox/quickstart.md SDKs: `npm i @tenkicloud/sandbox`, `pip install tenki`. Auth via `TENKI_API_KEY`.
+- Mitosis Labs: agents organized into offices, Cortex memory with cited evidence, and Yappy (JEV built in, macOS on Apple Silicon). Ideas: a swarm of Mitosis agents sharing Cortex memory with JEV picking who acts next; Cortex remembering which strategy beat which wave. Quickstart: https://mitosislabs.ai/developers/quickstart MCP: `claude mcp add --transport http mitosis https://mitosislabs.ai/api/mcp` CLI: `npm i -g @mitosislabs/sdk` then `mi login`. Docs index: https://mitosislabs.ai/developers/llms.txt
+
+## Rubric
+
+Each criterion is scored 1 to 5 and weighted to a total of 100. Finalists are rescored live: judges 70%, room vote 30%. Ties break on Performance, then Speed and cost.
+
+| Criterion | Points | A 5 looks like | A 3 looks like | A 1 looks like |
+|---|---|---|---|---|
+| Performance | 30 | Clearly beats the LLM baseline, with numbers anyone can reproduce from the repo | Works end to end and competes with the baseline | Does not run from the README, or no numbers |
+| Speed and cost | 20 | Median latency and cost per decision both measured, both a clear win over an LLM | One of the two measured, or no comparison | Not measured |
+| Showmanship | 20 | The demo makes the point in the first 15 seconds | Clear demo, slow to reach the good part | No demo, or a recording with no story |
+| Originality | 15 | A new use of a decision model that leans on typed answers, confidence, and speed | A known idea, done well | An existing demo with no changes |
+| Sponsor stack | 15 | Mitosis Labs or Tenki is creative and load-bearing | One sponsor used for a real job | Not used, or only named |
+
+## Rules
+
+- Solo or teams of up to 4 people.
+- JEV makes the core decisions. Other models may assist but must not choose the moves (pilot) or the orchestration decisions (squad).
+- Public repository that runs from its README. Results must be reproducible. No hard-coded scores.
+- Commit `results.json` to the repository root (format in "Recommended build" above). It is not uploaded separately; judges read it from the repo.
+- Entries lock at the deadline above. The latest submission for a given contact email is the one judged.
+- Finalists must present in person in San Francisco on September 30, 2026.
+
+## Required from the human before you submit
+
+Ask your human for these if you do not already know them. Do not invent them.
+
+1. Their name, email, and X or LinkedIn profile URL.
+2. A team name, and teammates (name and email, up to 3).
+3. By the deadline, the URL of their demo video: a 1 to 2 minute post on X, LinkedIn, or YouTube, tagging UFA. A phone recording where they talk is fine, no editing needed. It must cover (a) their creative genius idea, how and why they built it, (b) how they use Mitosis Labs or Tenki creatively, if they do, and (c) the demo itself, working. You cannot record this video for them, but you can help them outline it.
+4. Whether they can be in San Francisco on Wednesday September 30, 2026.
+
+## Submitting
+
+If the MCP server or the HTTP endpoint is unreachable or returns 404, submissions are not open yet: tell your human, keep building, and retry later. Never report an entry as submitted unless the server confirmed it.
+
+Submit once as soon as sections "contact" through "in_person" are known. Submit again with the same `contact.email` whenever the build fields change. The latest submission before the deadline counts.
+
+### Option A: MCP (preferred)
+
+- Server: `https://mitosislabs.ai/api/ufa/mcp` (streamable HTTP). Claude Code: `claude mcp add --transport http ufa https://mitosislabs.ai/api/ufa/mcp`
+- Tool: `submit_jev_entry`. Arguments: the entry object below.
+
+### Option B: HTTP
+
+`POST https://mitosislabs.ai/api/ufa/jev/entries` with `Content-Type: application/json` and the entry object as the body. Set `submitted_via` to `"api"`.
+
+### Entry object
+
+```json
+{
+  "contact": { "name": "Ada Lovelace", "email": "ada@example.com", "profile_url": "https://x.com/ada" },
+  "team": { "name": "Shields Down", "members": [ { "name": "Grace Hopper", "email": "grace@example.com" } ] },
+  "track": "pilot",
+  "pitch": "JEV dodges every bomb because it decides in one frame.",
+  "sponsors": { "mitosis": true, "tenki": true, "how": "200 parallel games in Tenki sandboxes; Cortex stores which strategy beat which wave." },
+  "needs_jev_access": false,
+  "in_person": true,
+  "build": {
+    "repo_url": "https://github.com/ada/jev-invaders",
+    "demo_video_url": "https://x.com/ada/status/1234567890"
+  },
+  "submitted_via": "mcp"
+}
+```
+
+Field rules:
+
+- Required on every submission: `contact.name`, `contact.email`, `contact.profile_url`, `team.name`, `track` (`pilot` | `squad` | `eval`), `pitch` (120 characters max), `in_person`.
+- `team.members`: up to 3 entries. May be empty.
+- `sponsors.how`: required when `mitosis` or `tenki` is true.
+- `build.*`: may be null until the deadline. At the deadline, `repo_url` and `demo_video_url` (a 1 to 2 minute post on X, LinkedIn, or YouTube tagging UFA; see item 3 above) are required for judging.
+- `submitted_via`: `"mcp"`, `"api"`, or `"form"`.
+
+## Links
+
+- Arena page: https://ufa.foundation/jev/space-invaders/
+- Share kit and registration: https://ufa.foundation/jev/
+- JEV launch post: https://typesafe.ai/blog/introducing-system-one-models-and-jev
+- JEV evals: https://evals.typesafe.ai/
+- JEV game playground: https://typesafe-ai-playground.vercel.app/doom
+- Tenki docs: https://tenki.cloud/docs
+- Mitosis Labs developer docs: https://mitosislabs.ai/developers

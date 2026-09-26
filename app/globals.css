@@ -1467,3 +1467,515 @@ section {
 .jev-register { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .jev-register .btn { font-size: 0.95rem; padding: 1.05em 2em; }
 #post, #register { scroll-margin-top: 2rem; }
+
+/* --- JEV Space Invaders arena -------------------------------------------- */
+/* Arcade details stay in the background: faint sprites, pixel dividers, one
+   hidden game. The page itself stays the UFA broadcast look. */
+#enter { scroll-margin-top: 5.5rem; }
+.invader { flex: none; display: inline-block; vertical-align: -0.1em; }
+.invader-anim .f1 { opacity: 0; }
+.invader-anim .f0 { animation: invader-f0 1.1s steps(1) infinite; }
+.invader-anim .f1 { animation: invader-f1 1.1s steps(1) infinite; }
+@keyframes invader-f0 { 0% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes invader-f1 { 0% { opacity: 0; } 50% { opacity: 1; } }
+
+.jev-arena-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+  padding: 1.5rem 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, rgba(255, 54, 54, 0.1), transparent 60%),
+    var(--panel);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.jev-arena-card:hover { border-color: var(--red); transform: translateY(-2px); }
+.jev-arena-sprites { display: flex; align-items: flex-end; gap: 0.7rem; color: var(--fg); }
+.jev-arena-text { flex: 1 1 260px; display: flex; flex-direction: column; gap: 0.25rem; }
+.jev-arena-text b { font-family: "Orbitron", var(--font); font-size: 1.15rem; letter-spacing: 0.02em; }
+.jev-arena-text span { color: var(--muted); font-size: 0.95rem; }
+
+.arena-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: 5.5rem 3.5rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.arena-hero .wrap { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.2rem; }
+.arena-title {
+  font-family: "Orbitron", var(--font);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 10vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.arena-title span { color: var(--red); display: block; }
+.arena-lead { max-width: 58ch; color: var(--muted); font-size: clamp(1.02rem, 3.6vw, 1.2rem); }
+.arena-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.9rem 1.5rem;
+  margin-top: 0.6rem;
+  max-width: 820px;
+}
+.arena-facts dt {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.arena-facts dd { font-weight: 700; margin-top: 0.2rem; }
+
+.sky { position: absolute; inset: 0; pointer-events: none; }
+.sky-formation {
+  position: absolute;
+  top: 2.2rem;
+  right: -1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  color: var(--fg);
+  opacity: 0.075;
+  animation: sky-march 9s steps(12) infinite alternate;
+}
+.sky-row { display: flex; gap: 1.1rem; justify-content: center; }
+@keyframes sky-march { from { transform: translateX(0); } to { transform: translateX(-9rem); } }
+.sky-saucer {
+  position: absolute;
+  top: 1.1rem;
+  left: -60px;
+  pointer-events: auto;
+  background: none;
+  border: 0;
+  padding: 6px;
+  color: var(--red);
+  opacity: 0.55;
+  cursor: crosshair;
+  animation: sky-saucer 22s linear infinite;
+  animation-delay: 4s;
+}
+.sky-saucer:hover, .sky-saucer:focus-visible { opacity: 1; outline: none; filter: drop-shadow(0 0 8px rgba(255, 54, 54, 0.8)); }
+@keyframes sky-saucer {
+  0% { transform: translateX(0); }
+  30%, 100% { transform: translateX(calc(100vw + 120px)); }
+}
+
+/* Split layout: hero and docs on the left, the entry form fills the right side
+   from top to bottom and scrolls on its own. Phones stack hero, form, docs. */
+.arena-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(380px, 36vw, 540px);
+  grid-template-areas: "hero side" "doc side";
+  align-items: start;
+}
+.arena-split .arena-hero { grid-area: hero; }
+/* The nav is sticky and about 4.5rem tall. The panel starts right under it, and its
+   content starts at the same height as the hero kicker on the left. */
+@media (min-width: 961px) {
+  .arena-split .arena-hero { padding-top: 5.5rem; }
+}
+html:has(.arena-split) { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.16) transparent; }
+.arena-split .arena-doc { grid-area: doc; }
+.arena-side { grid-area: side; }
+.arena-hero .wrap, .arena-doc { max-width: 820px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 3.5rem); }
+.arena-doc { width: 100%; padding-block: 3rem 5rem; }
+@media (max-width: 960px) {
+  .arena-split { grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "side" "doc"; }
+}
+.arena-doc { display: flex; flex-direction: column; gap: 3rem; min-width: 0; }
+.arena-doc section { scroll-margin-top: 5.5rem; }
+.arena-doc h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.arena-doc h2 .invader { color: var(--red); }
+.arena-doc h3 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.arena-doc p, .arena-doc li { color: #d6d6d2; max-width: 68ch; }
+.arena-doc p + p { margin-top: 0.8rem; }
+.arena-doc a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+.arena-doc b { color: var(--fg); }
+.arena-doc code, .entry code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--panel-2);
+  border: 1px solid var(--line-soft);
+  padding: 0.05em 0.4em;
+  border-radius: 4px;
+}
+.arena-doc ul { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.8rem; }
+.arena-small { font-size: 0.9rem; color: var(--muted) !important; margin-top: 0.8rem; }
+
+.arena-tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.8rem; margin-top: 1.2rem; }
+.arena-track {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem 1.05rem;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.arena-track-name {
+  font-family: "Orbitron", var(--font);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.arena-track p { font-size: 0.9rem; color: var(--muted) !important; }
+
+.arena-steps { list-style: none; counter-reset: st; display: flex; flex-direction: column; gap: 0.9rem; }
+.arena-steps li { counter-increment: st; position: relative; padding-left: 2.6rem; }
+.arena-steps li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: counter(st, decimal-leading-zero);
+  font-family: "Orbitron", var(--font);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--red);
+  padding-top: 0.15rem;
+}
+
+.arena-table { overflow-x: auto; margin-top: 1.4rem; border: 1px solid var(--line); border-radius: 8px; }
+.arena-table table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.arena-table th, .arena-table td { text-align: left; vertical-align: top; padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--line-soft); }
+.arena-table tr:last-child th, .arena-table tr:last-child td { border-bottom: 0; }
+.arena-table tbody th { white-space: nowrap; font-weight: 700; color: var(--fg); }
+.arena-table thead th {
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  background: var(--panel);
+}
+.arena-table td { color: #cfcfcb; }
+.rubric td { min-width: 170px; }
+.rubric .pts {
+  display: block;
+  font-family: "Orbitron", var(--font);
+  font-size: 0.72rem;
+  color: var(--red);
+  margin-top: 0.2rem;
+}
+.arena-code {
+  margin-top: 1rem;
+  overflow-x: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  font: 0.8rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #d6d6d2;
+}
+.arena-bonus {
+  border: 1px solid rgba(255, 54, 54, 0.35);
+  border-radius: 10px;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(255, 54, 54, 0.08), transparent);
+}
+.arena-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.6rem 2rem; }
+.arena-links ul { list-style: none; padding: 0; gap: 0; margin: 0; }
+.arena-links li { padding: 0.5rem 0; border-bottom: 1px dashed var(--line); display: flex; flex-direction: column; }
+.arena-links li a { text-decoration: none; font-weight: 700; }
+.arena-links li a:hover { text-decoration: underline; }
+.arena-links li span { font-size: 0.82rem; color: var(--muted); }
+.arena-konami {
+  margin-top: 1.4rem !important;
+  font-family: "Orbitron", var(--font);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: var(--muted-2) !important;
+  opacity: 0.35;
+}
+
+.arena-agents {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.3rem 1.4rem;
+  background:
+    linear-gradient(120deg, rgba(255, 54, 54, 0.12), transparent 55%),
+    var(--panel);
+}
+.arena-agents-ship { color: var(--red); margin-top: 0.2rem; }
+.arena-agents-body { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
+.arena-agents-kicker {
+  font-family: "Orbitron", var(--font);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.arena-doc .arena-agents h2 { font-size: clamp(1.2rem, 4vw, 1.45rem); margin: 0; }
+.arena-agents-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.9rem; margin-top: 0.4rem; }
+.arena-doc .arena-agents-actions a { color: #fff; text-decoration: none; }
+.arena-agents-actions code { overflow-wrap: anywhere; }
+.shields { display: flex; justify-content: space-around; color: rgba(255, 54, 54, 0.22); padding-block: 0.5rem; }
+
+/* Entry panel */
+.arena-side {
+  position: sticky;
+  top: 5.5rem;
+  margin-top: 5.5rem;
+  align-self: start;
+  height: calc(100vh - 6.5rem);
+  height: calc(100dvh - 6.5rem);
+  border-top: 1px solid var(--line);
+  border-top-left-radius: 14px;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background:
+    radial-gradient(120% 40% at 100% 0%, rgba(255, 54, 54, 0.1), transparent 60%),
+    var(--panel);
+  border-left: 1px solid var(--line);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 54, 54, 0.35) transparent;
+}
+.arena-side::-webkit-scrollbar { width: 6px; }
+.arena-side::-webkit-scrollbar-track { background: transparent; }
+.arena-side::-webkit-scrollbar-thumb { background: rgba(255, 54, 54, 0.3); border-radius: 999px; }
+.arena-side::-webkit-scrollbar-thumb:hover { background: rgba(255, 54, 54, 0.6); }
+@media (max-width: 960px) {
+  .arena-side { position: static; margin-top: 0; height: auto; overflow: visible; border-left: 0; border-radius: 0; border-block: 1px solid var(--line); }
+}
+/* Bottom padding covers the extra ~4.5rem the panel sits lower before it pins, so the
+   submit button can always scroll fully into view. */
+.entry, .entry-done { padding: 1.75rem clamp(1.25rem, 2.6vw, 2.25rem) 7rem; }
+@media (max-width: 960px) { .entry, .entry-done { padding-top: 2rem; padding-bottom: 2.5rem; } }
+.entry-payload pre, .copyrow pre, .arena-code { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.18) transparent; }
+.entry-head { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.1rem; }
+.entry-head .sharekit-tabs { margin: 0; }
+.entry-head .sharekit-tabs button { flex: 1; }
+.entry-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.entry-form fieldset { border: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+.entry-form legend {
+  font-family: "Orbitron", var(--font);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+.entry-form label, .entry-form .label { font-size: 0.85rem; font-weight: 600; color: var(--fg); margin-top: 0.35rem; }
+.entry-form .opt { font-weight: 500; color: var(--muted-2); font-size: 0.78rem; margin-left: 0.3rem; }
+.entry-form input[type="text"], .entry-form input:not([type]), .entry-form input[type="email"],
+.entry-form input[type="url"], .entry-form textarea {
+  width: 100%;
+  background: var(--bg-2);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  font-size: 0.92rem;
+}
+.entry-form textarea { resize: vertical; line-height: 1.45; }
+.entry-form input::placeholder, .entry-form textarea::placeholder { color: var(--muted-2); }
+.entry-form input:focus-visible, .entry-form textarea:focus-visible {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255, 54, 54, 0.18);
+}
+.entry-form input[type="file"] { font-size: 0.82rem; color: var(--muted); }
+.entry-form input[type="checkbox"], .entry-form input[type="radio"] { accent-color: var(--red); }
+.tracks-pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem; }
+.tracks-pick .pick {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.tracks-pick .pick input { position: absolute; opacity: 0; pointer-events: none; }
+.tracks-pick .pick b { font-size: 0.85rem; }
+.tracks-pick .pick span { font-size: 0.72rem; color: var(--muted); line-height: 1.3; }
+.tracks-pick .pick.on { border-color: var(--red); background: rgba(255, 54, 54, 0.1); }
+.tracks-pick .pick:focus-within { box-shadow: 0 0 0 3px rgba(255, 54, 54, 0.25); }
+.checks { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+.checks label, .entry-form label.inline { display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+.entry-form label.rules { font-size: 0.82rem; color: var(--muted); align-items: flex-start; }
+.entry-form label.rules input { margin-top: 0.2rem; }
+.entry-hint { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+.entry-hint.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--fg); }
+.entry-error { font-size: 0.85rem; color: var(--red-bright); }
+.entry-submit { width: 100%; font-size: 0.9rem; padding: 1.05em 1.5em; }
+.entry-agent { display: flex; flex-direction: column; gap: 0.65rem; }
+.entry-agent p { font-size: 0.9rem; color: #d6d6d2; }
+.entry-agent a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+.entry-agent h4 { font-size: 0.85rem; margin-top: 0.6rem; }
+.copyrow { display: flex; gap: 0.5rem; align-items: stretch; }
+.copyrow pre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem 0.7rem;
+  font: 0.76rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #d6d6d2;
+}
+.entry-done { display: flex; flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+.entry-boom { color: var(--red); animation: boom 0.5s steps(4) both; }
+@keyframes boom { from { transform: scale(0.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.entry-done-kicker {
+  font-family: "Orbitron", var(--font);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.entry-done h3 { font-size: 1.5rem; font-weight: 900; }
+.entry-done p { color: var(--muted); font-size: 0.92rem; }
+.entry-payload { width: 100%; font-size: 0.8rem; color: var(--muted); }
+.entry-payload summary { cursor: pointer; }
+.entry-payload pre {
+  margin-top: 0.5rem;
+  max-height: 260px;
+  overflow: auto;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.7rem;
+  font: 0.72rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Hidden arcade */
+.arcade {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.arcade-cab {
+  width: min(520px, 100%);
+  border: 1px solid rgba(255, 54, 54, 0.5);
+  border-radius: 14px;
+  background: #0b0b0b;
+  padding: 1rem;
+  box-shadow: 0 0 80px -20px rgba(255, 54, 54, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.arcade-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Orbitron", var(--font);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.arcade-x {
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.3em 0.7em;
+  cursor: pointer;
+}
+.arcade-screen {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 224 / 256;
+  max-height: 70vh;
+  object-fit: contain;
+  image-rendering: pixelated;
+  border-radius: 6px;
+  background: #050505;
+}
+.arcade-help { font-size: 0.8rem; color: var(--muted); text-align: center; }
+.arcade-pad { display: none; gap: 0.5rem; }
+.arcade-pad button {
+  flex: 1;
+  padding: 0.9rem;
+  font: 800 0.9rem "Orbitron", var(--font);
+  color: var(--fg);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  touch-action: none;
+  user-select: none;
+}
+@media (pointer: coarse) { .arcade-pad { display: flex; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .invader-anim .f0, .invader-anim .f1, .sky-formation, .entry-boom { animation: none; }
+  .invader-anim .f1 { opacity: 0; }
+  .sky-saucer { animation: none; left: auto; right: 1rem; }
+}
+.entry-hint-list { margin: 0.35rem 0 0.35rem 1.1rem; display: flex; flex-direction: column; gap: 0.15rem; color: var(--fg); }
+
+/* Sponsor strip, full width under both columns */
+.arena-sponsors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 3.5rem 1.25rem 4rem;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 54, 54, 0.05), transparent 70%);
+}
+.arena-sponsors-kicker {
+  font-family: "Orbitron", var(--font);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.arena-sponsors-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem 3rem; }
+.arena-sponsor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.arena-sponsor:hover, .arena-sponsor:focus-visible { opacity: 1; transform: translateY(-2px); }
+.arena-sponsor img { height: 38px; width: auto; }
+.arena-sponsor-mitosis { font-weight: 300; font-size: 1.55rem; letter-spacing: 0.06em; color: #e8e4e0; }
+.arena-sponsors-x { color: rgba(255, 54, 54, 0.5); }
+.entry-soon { color: var(--red); }

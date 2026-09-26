@@ -3,6 +3,8 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { JEV } from "@/data/jev";
 import { ShareKit } from "./ShareKit";
+import { Invader } from "@/components/Invader";
+import { InvaderGame } from "@/components/InvaderGame";
 
 const title = "JEV Bake-Off · $1,000 Emergency Game Show · UFA";
 const description =
@@ -26,6 +28,7 @@ export default function Jev() {
   return (
     <>
       <SiteNav brandHref="/" cta={{ label: "RSVP", href: JEV.partiful, external: true }} />
+      <InvaderGame />
       <main>
         <header className="band jev-hero" style={{ borderTop: "none" }}>
           <div className="wrap rise" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.25rem", textAlign: "center" }}>
@@ -65,6 +68,31 @@ export default function Jev() {
                 </a>
               )}
             </div>
+          </div>
+        </section>
+
+        <section className="band" id="enter">
+          <div className="wrap">
+            <div className="head">
+              <span className="kicker red">Step 03</span>
+              <h2>Enter the Space Invaders arena.</h2>
+              <p>
+                Build an agent that plays Space Invaders with JEV making the moves. Enter yourself, or let your agent enter
+                through MCP. Rules, rubric, and docs are all on the arena page.
+              </p>
+            </div>
+            <a className="jev-arena-card" href="/jev/space-invaders/">
+              <span className="jev-arena-sprites" aria-hidden="true">
+                <Invader kind="squid" size={20} />
+                <Invader kind="crab" size={26} />
+                <Invader kind="octopus" size={28} />
+              </span>
+              <span className="jev-arena-text">
+                <b>Space Invaders Arena</b>
+                <span>Instructions, rubric, and the entry form. Entries lock Mon Sep 28, 11:59pm PT.</span>
+              </span>
+              <span className="btn btn-red">Enter the arena</span>
+            </a>
           </div>
         </section>
       </main>

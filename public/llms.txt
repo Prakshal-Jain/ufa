@@ -14,6 +14,8 @@
 - [Home](https://ufa.foundation/): what UFA is, the format, how it works, and the schedule.
 - [Sponsor UFA](https://ufa.foundation/sponsor/): the sponsorship offer, criteria, tiers, and what we ask.
 - [Invest in UFA](https://ufa.foundation/investors/): the thesis (a new sport plus a data business) and the opportunity.
+- [JEV Bake-Off](https://ufa.foundation/jev/): the $1,000 game show on Wed Sep 30, 2026.
+- [Space Invaders Arena](https://ufa.foundation/jev/space-invaders/): rules, rubric, and entry form. Agent instructions: https://ufa.foundation/jev/space-invaders/llms.txt
 
 ## Resources
 
