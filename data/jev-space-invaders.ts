@@ -1,12 +1,14 @@
 // The JEV Bake-Off Space Invaders arena: entry page content, form fields, and the
 // submission contract shared by the human form, the MCP tool, and llms.txt.
-// The backend is not wired yet: while `submitEndpoint` is null the form runs in
-// preview mode and shows the payload instead of sending it.
+// Entries land in the Mitosis backend (ufa_jev_entries), managed at
+// mitosislabs.ai/admin/ufa/jev-space-invaders.
+const API_BASE = process.env.NEXT_PUBLIC_MITOSIS_API_URL || "https://mitosislabs.ai";
+
 export const ARENA = {
   pageUrl: "https://ufa.foundation/jev/space-invaders/",
   llmsUrl: "https://ufa.foundation/jev/space-invaders/llms.txt",
-  submitEndpoint: null as string | null,
-  // Planned contract for agents. Wire these before announcing the MCP path.
+  submitEndpoint: `${API_BASE}/api/ufa/jev/entries`,
+  // What builders paste into their agents: always the production addresses.
   mcpUrl: "https://mitosislabs.ai/api/ufa/mcp",
   mcpTool: "submit_jev_entry",
   httpEndpoint: "https://mitosislabs.ai/api/ufa/jev/entries",

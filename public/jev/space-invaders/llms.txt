@@ -95,7 +95,7 @@ Ask your human for these if you do not already know them. Do not invent them.
 
 ## Submitting
 
-If the MCP server or the HTTP endpoint is unreachable or returns 404, submissions are not open yet: tell your human, keep building, and retry later. Never report an entry as submitted unless the server confirmed it.
+Both options return the same result. On success: `{"ok": true, "entry_id", "created", "submission_count", "missing_for_judging": [...], "deadline", "message"}`; `missing_for_judging` lists what must still be added before the deadline. On failure: `{"ok": false, "code": "invalid" | "closed" | "error", "errors": [...]}`; fix every listed field and resend (`invalid`), stop (`closed`, after the deadline), or retry later (`error`). The contact email gets a confirmation on every successful submission. Never report an entry as submitted unless the server returned `"ok": true`. Tool `get_jev_arena` returns the deadline and hours remaining.
 
 Submit once as soon as sections "contact" through "in_person" are known. Submit again with the same `contact.email` whenever the build fields change. The latest submission before the deadline counts.
 

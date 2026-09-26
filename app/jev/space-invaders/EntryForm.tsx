@@ -5,6 +5,8 @@ import { ARENA, TRACKS } from "@/data/jev-space-invaders";
 import { Invader } from "@/components/Invader";
 
 type Mode = "human" | "agent";
+type SubmitOk = { ok: true; created: boolean; message: string; missing_for_judging: string[] };
+type SubmitResponse = SubmitOk | { ok: false; code: string; errors: string[] };
 
 const AGENT_PROMPT = `Read ${ARENA.llmsUrl} and enter me in the JEV Bake-Off Space Invaders arena. Ask me for anything you can't find, then submit the entry through the UFA MCP tool and show me what you sent.`;
 const MCP_ADD = `claude mcp add --transport http ufa ${ARENA.mcpUrl}`;
@@ -34,7 +36,8 @@ export function EntryForm() {
   const [mitosis, setMitosis] = useState(false);
   const [tenki, setTenki] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [sent, setSent] = useState<object | null>(null);
+  const [sent, setSent] = useState<SubmitOk | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,22 +71,25 @@ export function EntryForm() {
       submitted_via: "form",
     };
 
-    if (!ARENA.submitEndpoint) {
-      // Backend not wired yet. Preview the payload locally; tell real visitors plainly.
-      if (["localhost", "127.0.0.1"].includes(window.location.hostname)) setSent(payload);
-      else setError("Entries open in a few hours. Nothing was sent yet. Come back and submit then.");
-      return;
-    }
+    setSubmitting(true);
     try {
       const res = await fetch(ARENA.submitEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error(String(res.status));
-      setSent(payload);
+      const data = (await res.json().catch(() => null)) as SubmitResponse | null;
+      if (data?.ok) {
+        setSent(data);
+      } else if (data && !data.ok && data.errors?.length) {
+        setError(data.errors.join(" "));
+      } else {
+        throw new Error(String(res.status));
+      }
     } catch {
       setError("The entry didn't go through. Check your connection and submit again. Nothing is lost.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -92,19 +98,11 @@ export function EntryForm() {
       <div className="entry-done" aria-live="polite">
         <Invader kind="boom" size={54} className="entry-boom" />
         <p className="entry-done-kicker">Invader down</p>
-        <h3>You&apos;re in the arena.</h3>
-        <p>
-          We&apos;ll email you from here. Keep building, and submit again with the same email any time before{" "}
-          {ARENA.deadline} to update your entry.
-        </p>
-        {!ARENA.submitEndpoint && (
-          <details className="entry-payload">
-            <summary>Preview mode: this entry was not sent. See the payload</summary>
-            <pre>{JSON.stringify(sent, null, 2)}</pre>
-          </details>
-        )}
+        <h3>{sent.created ? "You're in the arena." : "Entry updated."}</h3>
+        <p>{sent.message}</p>
+        <p>We sent a confirmation to your email. Submit again with the same email any time before {ARENA.deadline} to update your entry.</p>
         <button type="button" className="btn btn-line sm" onClick={() => setSent(null)}>
-          Edit entry
+          Update entry
         </button>
       </div>
     );
@@ -144,9 +142,6 @@ export function EntryForm() {
             <code>POST {ARENA.httpEndpoint}</code> with the JSON body described in llms.txt.
           </p>
           <p className="entry-hint">Your agent can resubmit with the same email until {ARENA.deadline}. The latest entry counts.</p>
-          {!ARENA.submitEndpoint && (
-            <p className="entry-hint entry-soon">Agent submissions open in a few hours. The docs in llms.txt are live now.</p>
-          )}
         </div>
       ) : (
         <form className="entry-form" onSubmit={onSubmit} noValidate={false}>
@@ -239,8 +234,8 @@ export function EntryForm() {
               {error}
             </p>
           )}
-          <button type="submit" className="btn btn-red entry-submit">
-            <Invader kind="ship" size={14} /> Submit entry
+          <button type="submit" className="btn btn-red entry-submit" disabled={submitting}>
+            <Invader kind="ship" size={14} /> {submitting ? "Sending…" : "Submit entry"}
           </button>
         </form>
       )}

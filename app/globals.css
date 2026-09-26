@@ -1828,6 +1828,7 @@ html:has(.arena-split) { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 
 .entry-hint { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
 .entry-hint.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--fg); }
 .entry-error { font-size: 0.85rem; color: var(--red-bright); }
+.entry-submit:disabled { opacity: 0.6; cursor: wait; }
 .entry-submit { width: 100%; font-size: 0.9rem; padding: 1.05em 1.5em; }
 .entry-agent { display: flex; flex-direction: column; gap: 0.65rem; }
 .entry-agent p { font-size: 0.9rem; color: #d6d6d2; }
@@ -1978,4 +1979,3 @@ html:has(.arena-split) { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 
 .arena-sponsor img { height: 38px; width: auto; }
 .arena-sponsor-mitosis { font-weight: 300; font-size: 1.55rem; letter-spacing: 0.06em; color: #e8e4e0; }
 .arena-sponsors-x { color: rgba(255, 54, 54, 0.5); }
-.entry-soon { color: var(--red); }
