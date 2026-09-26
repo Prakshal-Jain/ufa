@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, FormEvent, ReactNode } from "react";
+import posthog from "posthog-js";
 
 // Shared email magic-link gate for the private one-pagers (/investors, /sponsor,
 // /creators). Renders the email form until the visitor holds a valid access
@@ -17,6 +18,26 @@ const API_BASE = process.env.NEXT_PUBLIC_MITOSIS_API_URL || "https://mitosislabs
 const ALEX_CHAT_URL = "https://mitosislabs.ai/chat/alex";
 
 export type GateAudience = "investor" | "sponsor" | "creator";
+
+// Set by instrumentation-client.ts, which strips ?access=<token> from the URL
+// before PostHog starts so the token never lands in analytics.
+const LINK_TOKEN_KEY = "ufa_access_from_link";
+
+// Funnel events for the gated pages. PostHog is a no-op until it is initialized
+// (it is skipped on localhost), so these are safe to call anywhere.
+function track(event: string, props: Record<string, unknown>) {
+  try { posthog.capture(event, props); } catch {}
+}
+
+function identify(email: string, audience: GateAudience) {
+  try { posthog.identify(email, { email, ufa_audience: audience }); } catch {}
+}
+
+// Lead capture failures are invisible to the visitor (we always advance), so
+// surface them in PostHog instead.
+function trackFailure(audience: GateAudience, endpoint: string, status: number | "network") {
+  track("ufa_lead_capture_failed", { audience, endpoint, status });
+}
 
 // Audience-aware wording for the "get a call from Alex" screen.
 const AUDIENCE_COPY: Record<GateAudience, { subject: string; contact: string }> = {
@@ -54,14 +75,18 @@ function EmailGate({
     setSubmitting(true);
     setError(null);
     try {
-      await fetch(`${API_BASE}/api/ufa/investor-request`, {
+      const res = await fetch(`${API_BASE}/api/ufa/investor-request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmed, audience }),
       });
+      if (!res.ok) trackFailure(audience, "investor-request", res.status);
+      identify(trimmed, audience);
+      track("ufa_email_submitted", { audience });
       // Always advance to "sent" regardless of server result (no enumeration)
       onSent(trimmed);
     } catch {
+      trackFailure(audience, "investor-request", "network");
       setError("Something went wrong. Try again.");
       setSubmitting(false);
     }
@@ -145,14 +170,17 @@ function CallRequestScreen({
     setSubmitting(true);
     setError(null);
     try {
-      await fetch(`${API_BASE}/api/ufa/call-request`, {
+      const res = await fetch(`${API_BASE}/api/ufa/call-request`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, phone: trimmed, audience }),
       });
+      if (!res.ok) trackFailure(audience, "call-request", res.status);
+      track("ufa_call_requested", { audience });
       // Advance regardless of server result: the number is captured either way.
       setDone(true);
     } catch {
+      trackFailure(audience, "call-request", "network");
       setError("Something went wrong. Try again.");
       setSubmitting(false);
     }
@@ -168,7 +196,13 @@ function CallRequestScreen({
             Keep your phone close. If now is not a good time, grab a slot below.
           </p>
           <p style={{ marginTop: "1.5rem", fontSize: "0.9rem", opacity: 0.7 }}>
-            <a href={ALEX_CHAT_URL} target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+            <a
+              href={ALEX_CHAT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("ufa_alex_chat_clicked", { audience, placement: "after_call_request" })}
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
               Or set up a time to talk with Alex &rarr;
             </a>
           </p>
@@ -214,7 +248,11 @@ function CallRequestScreen({
           Alex is the Co-founder of Mitosis Labs and the main point of contact for {copy.contact}.
         </p>
         <p style={{ marginTop: "1rem", fontSize: "0.9rem", opacity: 0.7 }}>
-          <a href={ALEX_CHAT_URL} style={{ color: "inherit", textDecoration: "underline" }}>
+          <a
+            href={ALEX_CHAT_URL}
+            onClick={() => track("ufa_alex_chat_clicked", { audience, placement: "call_request" })}
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
             Or set up a time to talk with Alex &rarr;
           </a>
         </p>
@@ -245,11 +283,20 @@ export function AccessGate({
   const checkAccess = useCallback(async () => {
     // 1. Check URL for ?access=<token> (from magic link redirect)
     const params = new URLSearchParams(window.location.search);
-    const urlToken = params.get("access");
+    // Normally already moved to sessionStorage by instrumentation-client.ts;
+    // the URL param is the fallback when sessionStorage was unavailable there.
+    const urlToken = (() => {
+      try {
+        const t = sessionStorage.getItem(LINK_TOKEN_KEY);
+        if (t) { sessionStorage.removeItem(LINK_TOKEN_KEY); return t; }
+      } catch {}
+      return params.get("access");
+    })();
     const expired = params.get("expired") === "1";
     const gateParam = params.get("gate") === "1";
 
     if (expired || gateParam) {
+      track("ufa_gate_viewed", { audience, state: expired ? "expired_link" : "new" });
       setGate(expired ? "expired" : "gate");
       return;
     }
@@ -261,14 +308,19 @@ export function AccessGate({
     })();
     const fallbackGate = () => {
       if (storedEmail) {
+        identify(storedEmail, audience);
+        track("ufa_gate_viewed", { audience, state: "returning" });
         setSubmittedEmail(storedEmail);
         setGate("sent");
       } else {
+        track("ufa_gate_viewed", { audience, state: "new" });
         setGate("gate");
       }
     };
 
-    const token = urlToken || sessionStorage.getItem(sessionKey);
+    const token = urlToken || (() => {
+      try { return sessionStorage.getItem(sessionKey); } catch { return null; }
+    })();
 
     if (!token) {
       fallbackGate();
@@ -284,23 +336,29 @@ export function AccessGate({
 
       if (data.valid) {
         // Persist token for this browser session only
-        sessionStorage.setItem(sessionKey, token);
-        // Clean the URL (remove ?access=...)
-        if (urlToken) {
+        try { sessionStorage.setItem(sessionKey, token); } catch {}
+        // Clean the URL (remove ?access=...) if it was still there
+        if (params.has("access")) {
           const clean = window.location.pathname;
           window.history.replaceState({}, "", clean);
         }
+        if (storedEmail) identify(storedEmail, audience);
+        track("ufa_access_granted", { audience, via: urlToken ? "magic_link" : "session" });
         setGate("content");
       } else {
-        sessionStorage.removeItem(sessionKey);
+        try { sessionStorage.removeItem(sessionKey); } catch {}
         // A dead magic link goes to "expired"; a stale session token falls back.
-        if (urlToken) setGate("expired");
-        else fallbackGate();
+        if (urlToken) {
+          track("ufa_gate_viewed", { audience, state: "expired_link" });
+          setGate("expired");
+        } else {
+          fallbackGate();
+        }
       }
     } catch {
       fallbackGate();
     }
-  }, [sessionKey, emailKey]);
+  }, [sessionKey, emailKey, audience]);
 
   useEffect(() => {
     checkAccess();
