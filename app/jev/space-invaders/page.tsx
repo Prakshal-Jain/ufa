@@ -261,6 +261,13 @@ export default function SpaceInvaders() {
           <a className="arena-sponsor" href="https://tenki.cloud" target="_blank" rel="noopener noreferrer" aria-label="Tenki">
             <img src="/sponsors/tenki.svg" alt="" width={150} height={40} />
           </a>
+          <span className="arena-sponsors-x" aria-hidden="true">
+            <Invader kind="squid" size={14} />
+          </span>
+          <a className="arena-sponsor" href="https://www.immersivecommons.com" target="_blank" rel="noopener noreferrer" aria-label="Immersive Commons">
+            <img className="arena-sponsor-ic-mark" src="/sponsors/immersive-commons-mark.svg" alt="" width={40} height={30} />
+            <span className="arena-sponsor-ic">Immersive Commons</span>
+          </a>
         </div>
       </section>
       <SiteFooter />

@@ -1994,4 +1994,11 @@ html:has(.arena-split) { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 
 .arena-sponsor:hover, .arena-sponsor:focus-visible { opacity: 1; transform: translateY(-2px); }
 .arena-sponsor img { height: 38px; width: auto; }
 .arena-sponsor-mitosis { font-weight: 300; font-size: 1.55rem; letter-spacing: 0.06em; color: #e8e4e0; }
+.arena-sponsor .arena-sponsor-ic-mark { height: 30px; }
+.arena-sponsor-ic { font-weight: 600; font-size: 1.05rem; letter-spacing: 0.22em; text-transform: uppercase; color: #e8e4e0; }
 .arena-sponsors-x { color: rgba(255, 54, 54, 0.5); }
+@media (max-width: 640px) {
+  .arena-sponsors-row { flex-direction: column; gap: 1.6rem; }
+  .arena-sponsors-x { display: none; }
+  .arena-sponsor-ic { font-size: 0.95rem; letter-spacing: 0.16em; }
+}
