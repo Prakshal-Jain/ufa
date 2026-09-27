@@ -30,13 +30,13 @@ Pick exactly one track:
    - A browser version you control, if the judges can rerun it from your README. Examples: https://github.com/christiancabp/space-assault (already has a JEV pilot), https://github.com/dwmkerr/spaceinvaders
 2. State. JEV accepts text only (no images). Convert each frame, or the 128-byte RAM, into compact JSON: ship x, alien grid positions, alien bullets with positions and velocity, shield state, lives, score.
 3. Decision. Ask JEV one `choice` question per step whose options are the six ALE actions: `NOOP`, `FIRE`, `RIGHT`, `LEFT`, `RIGHTFIRE`, `LEFTFIRE`. Use the returned `confidence` if it helps (for example, hold the last action when confidence is low).
-4. Baseline. Run the identical loop with an LLM through the System One adapter (https://github.com/typesafe-ai/system-one-adapter-python) so the comparison is apples to apples.
+4. Baseline. Run the identical loop with an LLM through the System One adapter (https://github.com/typesafe-ai/system-one-adapter-python) so the comparison is apples to apples. The baseline runs on the builder's own OpenAI, Anthropic, or Gemini key; UFA does not provide one.
 5. Measure in code, not by estimate. These numbers are how you debug your agent, see where JEV beats the baseline and where it does not, and how judges score Performance and Speed and cost. For every game (episode), record what the environment and the APIs hand back: the score (sum of rewards), steps, `info["episode_frame_number"]`, lives lost, model calls, token usage from each response's `usage`, client-side latency around each call (`time.perf_counter`), errors by HTTP status, retries, fallback actions, and the mean `confidence` of JEV's answers. Record the exact model id the API returns in `model` (for example `jev-1.13.0`), not only the alias you requested. Run at least 5 games for JEV and 5 for the baseline, with fixed seeds.
 6. Keep the numbers in `results.json` at the repository root, and push it to GitHub after every game. Append the new run, then commit and push right away, before you start the next game:
 
    ```bash
    git add results.json
-   git commit -m "results: run <n>, score <score>"
+   git commit -m "results: run <n>, score <score>"   # runs are numbered from 1
    git push
    ```
 
@@ -53,7 +53,7 @@ Pick exactly one track:
     "env_id": "ALE/SpaceInvaders-v5", "frameskip": 4, "repeat_action_probability": 0.25, "full_action_space": false,
     "max_num_frames_per_episode": 108000, "obs_type": "ram", "wrappers": [], "decision_interval_steps": 1,
     "state_encoding": "RAM bytes decoded to ship x, alien grid, bullets, shields, lives as JSON",
-    "ale_py_version": "0.10.1", "gymnasium_version": "1.1.1"
+    "ale_py_version": "0.12.1", "gymnasium_version": "1.3.0"
   },
   "runs": [
     {
@@ -62,7 +62,7 @@ Pick exactly one track:
       "latency_ms_p50": 142, "latency_ms_p95": 260, "latency_ms_total": 812000,
       "errors_by_status": { "429": 2 }, "retries": 2, "fallback_actions": 2,
       "mean_confidence": 0.83, "low_conf_rate": 0.06, "cost_usd": 0.067, "wall_clock_s": 910,
-      "served_model": "jev-1.13.0", "notes": "Held fire when confidence < 0.6; score up 20% over run 0."
+      "served_model": "jev-1.13.0", "notes": "Held fire when confidence < 0.6; score up 20% over run 1."
     }
   ],
   "baseline": {
@@ -75,7 +75,10 @@ Pick exactly one track:
 Field notes:
 
 - Only `runs[].score` is required. Fill in everything you can measure; leave out what you cannot. Every number must come from your code or the API response, never an estimate.
-- `models[].role`: `decider` (JEV making the moves), `baseline` (the LLM you compare against), `opponent` (head to head), `orchestrator` or `assistant` (anything else in the loop).
+- `models[].role`: `decider` (whatever chooses the moves: JEV in a real run), `baseline` (the LLM you compare against), `opponent` (head to head), `orchestrator` or `assistant` (anything else in the loop).
+- Waiting on a JEV key? You can still log runs with a random or scripted policy to test your harness. Name it honestly: `served_model: "random-policy"` (or similar) and `provider: "none"`. Those runs are marked as non-JEV and do not count toward Performance.
+- `latency_ms_p50`, `latency_ms_p95`, and `latency_ms_total` time each decision, whatever the decider is. `model_calls` is 0 when no model is called.
+- If you cap episodes yourself, record the cap in `config.max_steps`.
 - PettingZoo: set `config.env_id` to `pettingzoo.atari.space_invaders_v2`, list any SuperSuit wrappers in `config.wrappers`, use `max_cycles`, and add `opponent_score` to each run.
 - `notes` is a short line per run on what you changed and why. It keeps your own iteration log readable and lets judges follow your reasoning.
 - For evaluation we compute the rest ourselves: human-normalized score (random 148.0, human 1668.7), calls per second, error and fallback rates, JEV vs baseline ratios, and consistency checks. Runs whose numbers do not add up (for example p95 below p50, or more model calls than steps) are flagged, so check these yourself before you push.
@@ -126,9 +129,10 @@ Each criterion is scored 1 to 5 and weighted to a total of 100. Finalists are re
 Ask your human for these if you do not already know them. Do not invent them.
 
 1. Their name, email, and X or LinkedIn profile URL.
-2. A team name, and teammates (name and email, up to 3).
-3. By the deadline, the URL of their demo video: a 1 to 2 minute post on X, LinkedIn, or YouTube, tagging UFA. A phone recording where they talk is fine, no editing needed. It must cover (a) their creative genius idea, how and why they built it, (b) how they use Mitosis Labs or Tenki creatively, if they do, and (c) the demo itself, working. You cannot record this video for them, but you can help them outline it.
-4. Whether they can be in San Francisco on Wednesday September 30, 2026.
+2. A team name, teammates (name and email, up to 3), the track, and a one-line pitch (120 characters max; you may draft it, but get their approval).
+3. Whether they use Mitosis Labs or Tenki, and how (`sponsors`), and whether they need a JEV API key (`needs_jev_access`).
+4. By the deadline, the URL of their demo video: a 1 to 2 minute post on X, LinkedIn, or YouTube, tagging UFA. A phone recording where they talk is fine, no editing needed. It must cover (a) their creative genius idea, how and why they built it, (b) how they use Mitosis Labs or Tenki creatively, if they do, and (c) the demo itself, working. You cannot record this video for them, but you can help them outline it.
+5. Whether they can be in San Francisco on Wednesday September 30, 2026.
 
 ## Submitting
 
@@ -140,6 +144,7 @@ Submit once as soon as sections "contact" through "in_person" are known. Submit 
 
 - Server: `https://mitosislabs.ai/api/ufa/mcp` (streamable HTTP). Claude Code: `claude mcp add --transport http ufa https://mitosislabs.ai/api/ufa/mcp`
 - Tool: `submit_jev_entry`. Arguments: the entry object below.
+- Most agents only load a newly added MCP server after a restart. If the `ufa` tools are not available in your current session, you do not need to restart: call the server over HTTP JSON-RPC (POST `initialize`, then `tools/call` with `name: "submit_jev_entry"`), or use Option B.
 
 ### Option B: HTTP
 
@@ -169,7 +174,7 @@ Field rules:
 - Required on every submission: `contact.name`, `contact.email`, `contact.profile_url`, `team.name`, `track` (`pilot` | `squad` | `eval`), `pitch` (120 characters max), `in_person`.
 - `team.members`: up to 3 entries. May be empty.
 - `sponsors.how`: required when `mitosis` or `tenki` is true.
-- `build.*`: may be null until the deadline. At the deadline, `repo_url` and `demo_video_url` (a 1 to 2 minute post on X, LinkedIn, or YouTube tagging UFA; see item 3 above) are required for judging.
+- `build.*`: may be null or left out until the deadline. A null or missing field keeps whatever you sent before, so you never need to resend a repo link; to change one, send the new value. At the deadline, `repo_url` and `demo_video_url` (a 1 to 2 minute post on X, LinkedIn, or YouTube tagging UFA; see item 4 above) are required for judging.
 - `submitted_via`: `"mcp"`, `"api"`, or `"form"`.
 
 ## Links

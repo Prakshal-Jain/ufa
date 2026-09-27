@@ -23,9 +23,9 @@ export const ARENA = {
 export const AGENT_PROMPT = `Enter me in the UFA JEV Bake-Off Space Invaders arena and help me win it.
 
 1. Read ${ARENA.llmsUrl} end to end. It has the rules, the rubric, and the exact entry format.
-2. Ask me for anything you need and don't know: my name, email, X or LinkedIn profile, team name, teammates, track, and whether I can be in San Francisco on Wed Sep 30. Never make these up.
-3. Connect the UFA MCP server (claude mcp add --transport http ufa ${ARENA.mcpUrl}) and submit my entry with submit_jev_entry. If MCP isn't available, POST the same JSON to ${ARENA.httpEndpoint}. Only tell me I'm entered once the server returns "ok": true.
-4. Help me build: an agent that plays Space Invaders with JEV making the moves, plus an LLM baseline to compare against.
+2. Ask me for anything you need and don't know: my name, email, X or LinkedIn profile, team name, teammates, track, a one-line pitch (you can draft it for me to approve), whether I use Mitosis Labs or Tenki and how, whether I need a JEV API key, and whether I can be in San Francisco on Wed Sep 30. Never make these up.
+3. Connect the UFA MCP server (claude mcp add --transport http ufa ${ARENA.mcpUrl}) and submit my entry with submit_jev_entry. Most agents only load a new MCP server after a restart, so if the tool isn't available yet, call the same server over HTTP JSON-RPC or POST the same JSON to ${ARENA.httpEndpoint}. Only tell me I'm entered once the server returns "ok": true.
+4. Help me build: an agent that plays Space Invaders with JEV making the moves, plus an LLM baseline (on my own OpenAI, Anthropic, or Gemini key) to compare against. Play at least 5 games each, with fixed seeds.
 5. After every game, append the run to results.json at the root of my public GitHub repo, then commit and push it right away.
 6. When the repo or my demo video link changes, resubmit my entry with the same email to update it.`;
 
