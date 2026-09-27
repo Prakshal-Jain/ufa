@@ -1733,6 +1733,22 @@ html:has(.arena-split) { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 
 .arena-agents-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.9rem; margin-top: 0.4rem; }
 .arena-doc .arena-agents-actions a { color: #fff; text-decoration: none; }
 .arena-agents-actions code { overflow-wrap: anywhere; }
+.arena-agents-prompt {
+  margin: 0.3rem 0 0;
+  max-height: 16rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font: 0.8rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #d6d6d2;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+.arena-doc .arena-agents-actions a.arena-agents-link { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; font-size: 0.85rem; }
 .shields { display: flex; justify-content: space-around; color: rgba(255, 54, 54, 0.22); padding-block: 0.5rem; }
 
 /* Entry panel */

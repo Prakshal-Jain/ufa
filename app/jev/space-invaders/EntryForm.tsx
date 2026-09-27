@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ARENA, TRACKS } from "@/data/jev-space-invaders";
+import { AGENT_PROMPT, ARENA, TRACKS } from "@/data/jev-space-invaders";
 import { Invader } from "@/components/Invader";
 
 type Mode = "human" | "agent";
 type SubmitOk = { ok: true; created: boolean; message: string; missing_for_judging: string[] };
 type SubmitResponse = SubmitOk | { ok: false; code: string; errors: string[] };
 
-const AGENT_PROMPT = `Read ${ARENA.llmsUrl} and enter me in the JEV Bake-Off Space Invaders arena. Ask me for anything you can't find, then submit the entry through the UFA MCP tool and show me what you sent.`;
 const MCP_ADD = `claude mcp add --transport http ufa ${ARENA.mcpUrl}`;
 
 function CopyRow({ text, label }: { text: string; label: string }) {

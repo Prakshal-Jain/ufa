@@ -18,6 +18,17 @@ export const ARENA = {
   venue: "590 Howard St, San Francisco",
 };
 
+// The message builders paste into their agent. Shown on the page and in the form's
+// "My agent will" tab, so the two never drift.
+export const AGENT_PROMPT = `Enter me in the UFA JEV Bake-Off Space Invaders arena and help me win it.
+
+1. Read ${ARENA.llmsUrl} end to end. It has the rules, the rubric, and the exact entry format.
+2. Ask me for anything you need and don't know: my name, email, X or LinkedIn profile, team name, teammates, track, and whether I can be in San Francisco on Wed Sep 30. Never make these up.
+3. Connect the UFA MCP server (claude mcp add --transport http ufa ${ARENA.mcpUrl}) and submit my entry with submit_jev_entry. If MCP isn't available, POST the same JSON to ${ARENA.httpEndpoint}. Only tell me I'm entered once the server returns "ok": true.
+4. Help me build: an agent that plays Space Invaders with JEV making the moves, plus an LLM baseline to compare against.
+5. After every game, append the run to results.json at the root of my public GitHub repo, then commit and push it right away.
+6. When the repo or my demo video link changes, resubmit my entry with the same email to update it.`;
+
 export const TRACKS = [
   {
     id: "pilot",

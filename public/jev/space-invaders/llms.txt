@@ -32,7 +32,15 @@ Pick exactly one track:
 3. Decision. Ask JEV one `choice` question per step whose options are the six ALE actions: `NOOP`, `FIRE`, `RIGHT`, `LEFT`, `RIGHTFIRE`, `LEFTFIRE`. Use the returned `confidence` if it helps (for example, hold the last action when confidence is low).
 4. Baseline. Run the identical loop with an LLM through the System One adapter (https://github.com/typesafe-ai/system-one-adapter-python) so the comparison is apples to apples.
 5. Measure in code, not by estimate. These numbers are how you debug your agent, see where JEV beats the baseline and where it does not, and how judges score Performance and Speed and cost. For every game (episode), record what the environment and the APIs hand back: the score (sum of rewards), steps, `info["episode_frame_number"]`, lives lost, model calls, token usage from each response's `usage`, client-side latency around each call (`time.perf_counter`), errors by HTTP status, retries, fallback actions, and the mean `confidence` of JEV's answers. Record the exact model id the API returns in `model` (for example `jev-1.13.0`), not only the alias you requested. Run at least 5 games for JEV and 5 for the baseline, with fixed seeds.
-6. Commit the numbers as `results.json` at the repository root, append a run every time you play a game, and document in the README how to regenerate the file. Push each new version as you iterate: judges read the file from your repo and follow how your agent improves over the build, so your history counts.
+6. Keep the numbers in `results.json` at the repository root, and push it to GitHub after every game. Append the new run, then commit and push right away, before you start the next game:
+
+   ```bash
+   git add results.json
+   git commit -m "results: run <n>, score <score>"
+   git push
+   ```
+
+   Do this every time, including failed or short games. Judges read `results.json` from the default branch of your public repo and follow how your agent improves over the build, so a run that is not pushed does not count. Automate it in your harness (for example, a function that writes the file and runs the three commands after each episode) so no run is missed. Document in the README how to regenerate the file.
 
 ```json
 {
@@ -109,7 +117,7 @@ Each criterion is scored 1 to 5 and weighted to a total of 100. Finalists are re
 - Solo or teams of up to 4 people.
 - JEV makes the core decisions. Other models may assist but must not choose the moves (pilot) or the orchestration decisions (squad).
 - Public repository that runs from its README. Results must be reproducible. No hard-coded scores.
-- Commit `results.json` to the repository root (format in "Recommended build" above). It is not uploaded separately; judges read it from the repo.
+- Commit `results.json` to the repository root (format in "Recommended build" above) and push it to GitHub after every game. It is not uploaded separately; judges read it from the default branch of your public repo.
 - Entries lock at the deadline above. The latest submission for a given contact email is the one judged.
 - Finalists must present in person in San Francisco on September 30, 2026.
 

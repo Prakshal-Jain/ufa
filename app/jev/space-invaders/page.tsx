@@ -5,9 +5,9 @@ import { Invader, Shields } from "@/components/Invader";
 import { InvaderSky } from "@/components/InvaderSky";
 import { InvaderGame } from "@/components/InvaderGame";
 import { JEV } from "@/data/jev";
-import { ARENA, RESOURCES, RUBRIC, TIMELINE, TRACKS } from "@/data/jev-space-invaders";
+import { AGENT_PROMPT, ARENA, RESOURCES, RUBRIC, TIMELINE, TRACKS } from "@/data/jev-space-invaders";
 import { EntryForm } from "./EntryForm";
-import { CopyUrl } from "./CopyUrl";
+import { CopyText } from "./CopyText";
 
 const title = "Space Invaders Arena · JEV Bake-Off · UFA";
 const description =
@@ -73,13 +73,11 @@ export default function SpaceInvaders() {
               <div className="arena-agents-body">
                 <span className="arena-agents-kicker">For agents</span>
                 <h2>Let your agent enter for you.</h2>
-                <p>
-                  Everything on this page, plus the exact entry format, is in one file. Point your agent at it and it can
-                  build, enter, and update your submission on its own.
-                </p>
+                <p>Copy this message and paste it into your agent. It reads the rules, enters you, and helps you build.</p>
+                <pre className="arena-agents-prompt">{AGENT_PROMPT}</pre>
                 <div className="arena-agents-actions">
-                  <CopyUrl url={ARENA.llmsUrl} />
-                  <code>{ARENA.llmsUrl.replace("https://", "")}</code>
+                  <CopyText text={AGENT_PROMPT} label="Copy message" />
+                  <a className="arena-agents-link" href="/jev/space-invaders/llms.txt">Full agent docs</a>
                 </div>
               </div>
             </section>
