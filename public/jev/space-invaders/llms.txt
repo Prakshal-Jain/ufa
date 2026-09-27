@@ -31,8 +31,8 @@ Pick exactly one track:
 2. State. JEV accepts text only (no images). Convert each frame, or the 128-byte RAM, into compact JSON: ship x, alien grid positions, alien bullets with positions and velocity, shield state, lives, score.
 3. Decision. Ask JEV one `choice` question per step whose options are the six ALE actions: `NOOP`, `FIRE`, `RIGHT`, `LEFT`, `RIGHTFIRE`, `LEFTFIRE`. Use the returned `confidence` if it helps (for example, hold the last action when confidence is low).
 4. Baseline. Run the identical loop with an LLM through the System One adapter (https://github.com/typesafe-ai/system-one-adapter-python) so the comparison is apples to apples.
-5. Measure in code, not by estimate. For every game (episode), record what the environment and the APIs hand back: the score (sum of rewards), steps, `info["episode_frame_number"]`, lives lost, model calls, token usage from each response's `usage`, client-side latency around each call (`time.perf_counter`), errors by HTTP status, retries, fallback actions, and the mean `confidence` of JEV's answers. Record the exact model id the API returns in `model` (for example `jev-1.13.0`), not only the alias you requested. Run at least 5 games for JEV and 5 for the baseline, with fixed seeds.
-6. Commit the numbers as `results.json` at the repository root, append a run every time you play a game, and document in the README how to regenerate the file. We read it from your repo throughout the event, so every version you push is part of your build history.
+5. Measure in code, not by estimate. These numbers are how you debug your agent, see where JEV beats the baseline and where it does not, and how judges score Performance and Speed and cost. For every game (episode), record what the environment and the APIs hand back: the score (sum of rewards), steps, `info["episode_frame_number"]`, lives lost, model calls, token usage from each response's `usage`, client-side latency around each call (`time.perf_counter`), errors by HTTP status, retries, fallback actions, and the mean `confidence` of JEV's answers. Record the exact model id the API returns in `model` (for example `jev-1.13.0`), not only the alias you requested. Run at least 5 games for JEV and 5 for the baseline, with fixed seeds.
+6. Commit the numbers as `results.json` at the repository root, append a run every time you play a game, and document in the README how to regenerate the file. Push each new version as you iterate: judges read the file from your repo and follow how your agent improves over the build, so your history counts.
 
 ```json
 {
@@ -69,11 +69,10 @@ Field notes:
 - Only `runs[].score` is required. Fill in everything you can measure; leave out what you cannot. Every number must come from your code or the API response, never an estimate.
 - `models[].role`: `decider` (JEV making the moves), `baseline` (the LLM you compare against), `opponent` (head to head), `orchestrator` or `assistant` (anything else in the loop).
 - PettingZoo: set `config.env_id` to `pettingzoo.atari.space_invaders_v2`, list any SuperSuit wrappers in `config.wrappers`, use `max_cycles`, and add `opponent_score` to each run.
-- `notes` is a short line per run on what you changed and why. It is how judges follow your iterations.
-- We compute the rest ourselves: human-normalized score (random 148.0, human 1668.7), calls per second, error and fallback rates, JEV vs baseline ratios, and consistency checks. Runs whose numbers do not add up (for example p95 below p50, or more model calls than steps) are flagged.
-- We also read your `package.json`, `requirements.txt`, `pyproject.toml`, and `go.mod` to see which SDKs you use, so keep them in the repo.
+- `notes` is a short line per run on what you changed and why. It keeps your own iteration log readable and lets judges follow your reasoning.
+- For evaluation we compute the rest ourselves: human-normalized score (random 148.0, human 1668.7), calls per second, error and fallback rates, JEV vs baseline ratios, and consistency checks. Runs whose numbers do not add up (for example p95 below p50, or more model calls than steps) are flagged, so check these yourself before you push.
+- Keep your dependency manifests (`package.json`, `requirements.txt`, `pyproject.toml`, `go.mod`) in the repo. Judges use them to reproduce your setup and to credit your sponsor stack.
 - Squad and eval entries use the same shape, with one run per game or test case; extra fields are allowed.
-- Run data from `results.json` is anonymized and feeds UFA's build analytics, shared with UFA partners.
 
 ## JEV API
 
