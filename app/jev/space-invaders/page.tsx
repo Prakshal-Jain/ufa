@@ -29,11 +29,19 @@ export const metadata: Metadata = {
 };
 
 const RESULTS_EXAMPLE = `{
-  "harness": "ALE/SpaceInvaders-v5",
-  "model": "jev-1.13.0",
+  "schema_version": 2,
+  "models": [
+    { "role": "decider", "served_model": "jev-1.13.0" },
+    { "role": "baseline", "served_model": "claude-haiku-4-5" }
+  ],
+  "config": { "env_id": "ALE/SpaceInvaders-v5", "frameskip": 4,
+              "repeat_action_probability": 0.25 },
   "runs": [
-    { "score": 1240, "frames": 5310, "decisions": 5310,
-      "latency_ms_p50": 142, "latency_ms_p95": 260, "cost_usd": 0.04 }
+    { "seed": 1, "score": 1240, "steps": 5310, "lives_lost": 3,
+      "model_calls": 5310, "input_tokens": 1593000,
+      "latency_ms_p50": 142, "latency_ms_p95": 260,
+      "errors_by_status": { "429": 2 }, "mean_confidence": 0.83,
+      "cost_usd": 0.067, "notes": "Held fire below 0.6 confidence" }
   ],
   "baseline": { "model": "claude-haiku-4-5", "runs": [ ... ] }
 }`;
@@ -158,9 +166,11 @@ export default function SpaceInvaders() {
                 is fair. Judges care about the gap.
               </p>
               <p>
-                <b>The results file.</b> Commit a <code>results.json</code> to the root of your repo with at least 5 runs.
-                Squad and Eval entries use the same shape, with one run per game or test case. Judges read it straight from
-                GitHub, so make sure your README says how to regenerate it.
+                <b>The results file.</b> Commit a <code>results.json</code> to the root of your repo and append a run
+                every time you play. Measure in code, not by estimate: score, steps, lives, model calls, tokens and latency
+                from each API response, errors, and JEV&apos;s confidence. Record the exact model id the API returns. We read
+                the file throughout the event, so every version you push counts as build history. The full field list is in{" "}
+                <a href="/jev/space-invaders/llms.txt">llms.txt</a>. Run data is anonymized and shared with UFA partners.
               </p>
               <pre className="arena-code">{RESULTS_EXAMPLE}</pre>
             </section>
