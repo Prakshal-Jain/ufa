@@ -89,7 +89,7 @@ export default function Jev() {
               </span>
               <span className="jev-arena-text">
                 <b>Space Invaders Arena</b>
-                <span>Instructions, rubric, and the entry form. Entries lock Mon Sep 28, 11:59pm PT.</span>
+                <span>Instructions, rubric, and the entry form. Entries lock Tue Sep 29, 11:59pm PT.</span>
               </span>
               <span className="btn btn-red">Enter the arena</span>
             </a>

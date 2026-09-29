@@ -6,8 +6,8 @@
 
 - Name: The JEV Bake-Off, a UFA (Ultimate Fighting Agents) game show.
 - Prize: $1,000, winner takes all. No split, no runner-up.
-- Entries lock: Monday September 28, 2026, 11:59pm PT (2026-09-29T06:59:00Z).
-- Top 10 announced: Tuesday September 29, 2026, 8pm PT. Judges pick 9. The 10th is the Fan Favorite (most quote-posts of the team's demo video post that tag UFA, counted at 6pm PT).
+- Entries lock: Tuesday September 29, 2026, 11:59pm PT (2026-09-30T06:59:00Z).
+- Top 10 announced: Wednesday September 30, 2026, 6 to 7pm PT. Judges pick 9. The 10th is the Fan Favorite (most quote-posts of the team's demo video post that tag UFA, counted Wed Sep 30 at 4pm PT).
 - Live show: Wednesday September 30, 2026, 7 to 9pm PT, 590 Howard St, San Francisco. Finalists present in person, five minutes each, hard stop.
 - Room RSVP: https://partiful.com/e/OTceSaxsG5xUuZ54BeI4
 - Presented by UFA, Mitosis Labs, and Tenki.

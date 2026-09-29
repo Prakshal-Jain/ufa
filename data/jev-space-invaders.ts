@@ -12,8 +12,8 @@ export const ARENA = {
   mcpUrl: "https://mitosislabs.ai/api/ufa/mcp",
   mcpTool: "submit_jev_entry",
   httpEndpoint: "https://mitosislabs.ai/api/ufa/jev/entries",
-  deadline: "Mon Sep 28, 11:59pm PT",
-  finalists: "Tue Sep 29, 8pm PT",
+  deadline: "Tue Sep 29, 11:59pm PT",
+  finalists: "Wed Sep 30, 6 to 7pm PT",
   show: "Wed Sep 30, 7 to 9pm PT",
   venue: "590 Howard St, San Francisco",
 };
